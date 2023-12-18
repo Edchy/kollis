@@ -1,0 +1,22 @@
+.main-header {
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  grid-area: head;
+  display: flex;
+  align-items: center;
+}
+
+.main-nav {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+
+  .main-nav__list {
+    display: flex;
+    list-style: none;
+
+    & > li:not(:last-child) {
+      margin-right: 1rem;
+    }
+  }
+}

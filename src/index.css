@@ -9,25 +9,24 @@
   box-sizing: border-box;
   font-family: sans-serif;
 }
+
 .App {
-  max-width: 700px;
+  width: 90%;
+  max-width: 11 00px;
   margin-inline: auto;
+  height: 100vh;
+  display: grid;
+  grid-template-areas:
+    "head head"
+    "aside aside"
+    "main main"
+    "foot foot";
+  grid-template-rows: 50px 20px 1fr 100px;
 }
 
-/* Header Styles */
-
-.main-header {
-  background-color: var(--color-dark);
-  color: var(--color-light);
-  padding: 1rem;
-}
-
-.main-nav {
-  display: flex;
-  justify-content: space-between;
-
-  .main-list {
-    display: flex;
-    list-style: none;
-  }
+.main {
+  grid-area: main;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 1rem;
 }
