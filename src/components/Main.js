@@ -3,7 +3,7 @@ import { useState } from "react";
 // // // // // // // // // //
 // // // COMPONENT // // //
 // // // // // // // // //
-export default function Main() {
+export default function Mains() {
   const [chosen, setChosen] = useState([]);
   function handleAdd(newNutrient) {
     let existIndex = chosen.findIndex(
