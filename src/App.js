@@ -141,6 +141,11 @@ function Nutrient({ nutrient, onHandleAdd }) {
 // // // COMPONENT // // //
 // // // // // // // // //
 function ResultBox({ chosen }) {
+  const totalCarbs = chosen.reduce(
+    (acc, curr) => acc + curr.carbohydrates_total_g,
+    0
+  );
+
   return (
     <div style={{ border: "1px solid black" }}>
       {chosen.map((item) => (
@@ -149,6 +154,7 @@ function ResultBox({ chosen }) {
           <div>{item.carbohydrates_total_g}</div>
         </div>
       ))}
+      <h2>{totalCarbs}</h2>
     </div>
   );
 }
