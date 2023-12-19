@@ -21,6 +21,7 @@ export default function App() {
                 ...obj,
                 carbohydrates_total_g:
                   obj.carbohydrates_total_g + newNutrient.carbohydrates_total_g,
+                serving_size_g: obj.serving_size_g + newNutrient.serving_size_g,
               }
             : obj
         )
@@ -74,6 +75,7 @@ function SearchBox({ onHandleAdd }) {
       const data = await response.json();
       console.log(data);
       // sätter "searchResults" state till fetch resultatet
+      // setSearchResults((prev) => [...prev, data.items]);
       setSearchResults(data.items);
     } catch (error) {
       setError(error.message);
@@ -128,12 +130,36 @@ function NutrientsList({ nutrients, onHandleAdd }) {
 }
 
 function Nutrient({ nutrient, onHandleAdd }) {
+  const [grams, setGrams] = useState(nutrient.serving_size_g);
+  console.log(typeof grams);
+  let carbs =
+    nutrient.carbohydrates_total_g * (grams / nutrient.serving_size_g);
   return (
     <article>
       <h3>{nutrient.name}</h3>
-      <div>Portion: {nutrient.serving_size_g}g</div>
-      <div>Carbs: {nutrient.carbohydrates_total_g}</div>
-      <button onClick={() => onHandleAdd(nutrient)}>add</button>
+      <div>
+        Grams:{" "}
+        <input
+          type="number"
+          min="0"
+          max="400"
+          step="10"
+          value={grams}
+          onChange={(e) => setGrams(Number(e.target.value))}
+        />
+      </div>
+      <div>Carbs: {carbs.toFixed(1)}</div>
+      <button
+        onClick={() => {
+          onHandleAdd({
+            ...nutrient,
+            serving_size_g: grams,
+            carbohydrates_total_g: carbs,
+          });
+        }}
+      >
+        add
+      </button>
     </article>
   );
 }
@@ -145,16 +171,18 @@ function ResultBox({ chosen }) {
     (acc, curr) => acc + curr.carbohydrates_total_g,
     0
   );
-
   return (
     <div style={{ border: "1px solid black" }}>
-      {chosen.map((item) => (
-        <div key={item.carbohydrates_total_g}>
-          <div>{item.name}</div>
+      {chosen.map((item, i) => (
+        <div key={item.name + i}>
+          <div>
+            {item.name}
+            {item.serving_size_g}g
+          </div>
           <div>{item.carbohydrates_total_g}</div>
         </div>
       ))}
-      <h2>{totalCarbs}</h2>
+      <h2>{totalCarbs.toFixed(1)}</h2>
     </div>
   );
 }
