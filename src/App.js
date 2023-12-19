@@ -4,13 +4,35 @@ import InfoBar from "./components/InfoBar";
 import { useState } from "react";
 
 export default function App() {
+  const [chosen, setChosen] = useState([]);
+
+  function handleAdd(newNutrient) {
+    let existIndex = chosen.findIndex(
+      (existingObj) => existingObj.name === newNutrient.name
+    );
+    console.log(existIndex);
+    console.log(newNutrient);
+    if (existIndex === -1) setChosen((prev) => [...prev, newNutrient]);
+    else
+      setChosen((prev) =>
+        prev.map((obj, index) =>
+          index === existIndex
+            ? {
+                ...obj,
+                carbohydrates_total_g:
+                  obj.carbohydrates_total_g + newNutrient.carbohydrates_total_g,
+              }
+            : obj
+        )
+      );
+  }
   return (
     <div className="App">
       <Header />
       <InfoBar />
       <Main>
-        <SearchBox />
-        <ResultBox />
+        <SearchBox onHandleAdd={handleAdd} />
+        <ResultBox chosen={chosen} />
       </Main>
       <Footer />
     </div>
@@ -26,8 +48,8 @@ function Main({ children }) {
 // // // // // // // // // //
 // // // COMPONENT // // //
 // // // // // // // // //
-function SearchBox() {
-  const [nutrients, setNutrients] = useState([]);
+function SearchBox({ onHandleAdd }) {
+  const [searchResults, setSearchResults] = useState([]);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [query, setQuery] = useState("");
@@ -51,8 +73,8 @@ function SearchBox() {
 
       const data = await response.json();
       console.log(data);
-      // sätter "nutrients" state till fetch resultatet
-      setNutrients(data.items);
+      // sätter "searchResults" state till fetch resultatet
+      setSearchResults(data.items);
     } catch (error) {
       setError(error.message);
       // När allt är klart finns ett resultat och "loading state" sätts till false
@@ -76,41 +98,57 @@ function SearchBox() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           type="text"
+          placeholder="Enter food or drink..."
         />
+        <button type="submit">Search</button>
+        <button type="button">Quick Add</button>
       </form>
       {/* Conditional rendering */}
       {/* Endast om isLoading och error är false ritas nutrients-arrayen ut */}
       {isLoading && <p>loading...</p>}
       {error && <p>{error}</p>}
-      {!isLoading && !error && <NutrientsList nutrients={nutrients} />}
+      {!isLoading && !error && (
+        <NutrientsList onHandleAdd={onHandleAdd} nutrients={searchResults} />
+      )}
     </section>
   );
 }
 
-function NutrientsList({ nutrients }) {
+function NutrientsList({ nutrients, onHandleAdd }) {
   return (
     <div>
       {/* Om arrayen innehåller något skrivs det annars skrivs meddelande */}
       {nutrients.length > 0
-        ? nutrients.map((n) => <Nutrient key={n.name} nutrient={n} />)
+        ? nutrients.map((n) => (
+            <Nutrient onHandleAdd={onHandleAdd} key={n.name} nutrient={n} />
+          ))
         : "no result"}
     </div>
   );
 }
 
-function Nutrient({ nutrient }) {
+function Nutrient({ nutrient, onHandleAdd }) {
   return (
     <article>
       <h3>{nutrient.name}</h3>
       <div>Portion: {nutrient.serving_size_g}g</div>
       <div>Carbs: {nutrient.carbohydrates_total_g}</div>
-      <button>add</button>
+      <button onClick={() => onHandleAdd(nutrient)}>add</button>
     </article>
   );
 }
 // // // // // // // // // //
 // // // COMPONENT // // //
 // // // // // // // // //
-function ResultBox() {
-  return <div style={{ border: "1px solid black" }}></div>;
+function ResultBox({ chosen }) {
+  return (
+    <div style={{ border: "1px solid black" }}>
+      {chosen.map((item) => (
+        <div key={item.carbohydrates_total_g}>
+          <div>{item.name}</div>
+          <div>{item.carbohydrates_total_g}</div>
+        </div>
+      ))}
+    </div>
+  );
 }
