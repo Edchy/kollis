@@ -5,11 +5,11 @@ import Main from "./components/Main";
 
 export default function App() {
   return (
-    <div className="App">
+    <>
       <Header />
       <InfoBar />
       <Main />
       <Footer />
-    </div>
+    </>
   );
 }

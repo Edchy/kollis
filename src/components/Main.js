@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // // // // // // // // // //
 // // // COMPONENT // // //
 // // // // // // // // //
-export default function Mains() {
+export default function Main() {
   const [chosen, setChosen] = useState([]);
   function handleAdd(newNutrient) {
     let existIndex = chosen.findIndex(
@@ -29,8 +29,8 @@ export default function Mains() {
   return (
     <main className="main">
       {" "}
-      <SearchBox onHandleAdd={handleAdd} />
-      <ResultBox chosen={chosen} />
+      <SearchResultsBox onHandleAdd={handleAdd} />
+      <ChosenResultBox chosen={chosen} />
     </main>
   );
 }
@@ -38,13 +38,13 @@ export default function Mains() {
 // // // // // // // // // //
 // // // COMPONENT // // //
 // // // // // // // // //
-function SearchBox({ onHandleAdd }) {
+function SearchResultsBox({ onHandleAdd }) {
   const [searchResults, setSearchResults] = useState([]);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [query, setQuery] = useState("");
 
-  // Hämta data funktionen deklareras
+  // Hämtadata funktionen deklareras
   async function fetchData(q) {
     // Visar att datan laddar
     setIsLoading(true);
@@ -64,7 +64,6 @@ function SearchBox({ onHandleAdd }) {
       const data = await response.json();
       console.log(data);
       // sätter "searchResults" state till fetch resultatet
-
       setSearchResults(data.items);
     } catch (error) {
       setError(error.message);
@@ -73,7 +72,7 @@ function SearchBox({ onHandleAdd }) {
       setIsLoading(false);
     }
   }
-  // Funktionen körs när form submittas
+  // Funktion för när searchform submittas (Enter eller search(submit) knapp trycks)
   function handleSubmit(e) {
     e.preventDefault();
     // funktionen anropar datahämtningsfunktionen med det som skrivs i input, om något skrivits in.
@@ -82,18 +81,8 @@ function SearchBox({ onHandleAdd }) {
     setQuery("");
   }
   return (
-    <section>
-      <form onSubmit={handleSubmit}>
-        {/* Controlled Element */}
-        <input
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          type="text"
-          placeholder="Enter food or drink..."
-        />
-        <button type="submit">Search</button>
-        <button type="button">Quick Add</button>
-      </form>
+    <section className="search-results-box">
+      <Form onHandleSubmit={handleSubmit} query={query} onSetQuery={setQuery} />
       {/* Conditional rendering */}
       {/* Endast om isLoading och error är false ritas SearchResultsListan ut */}
       {isLoading && <p>loading...</p>}
@@ -107,22 +96,54 @@ function SearchBox({ onHandleAdd }) {
     </section>
   );
 }
+function Form({ onHandleSubmit, query, onSetQuery }) {
+  return (
+    <form className="search-form" onSubmit={onHandleSubmit}>
+      {/* Controlled Element */}
+      <input
+        className="search"
+        value={query}
+        onChange={(e) => onSetQuery(e.target.value)}
+        type="text"
+        placeholder="Enter foods 🥞 and/or drinks 🥤..."
+      />
+      <div className="form-buttons">
+        <Button type="submit">Search</Button>
+        <Button type="button">Quick Add</Button>
+      </div>
+    </form>
+  );
+}
+
+function Button({ children, type = "button" }) {
+  return <button type={type}>{children}</button>;
+}
 
 function SearchResultsList({ searchResults, onHandleAdd }) {
+  // Använder state, useEffect samt conditional rendering för att rendera komponenten NoResult endast EFTER den initiala renderingen. Anledningen är att texten om att sökresultat inte gav något svar annars visas direkt. Känns som att det skulle kunna lösas snyggare/effektivare (eftersom jag sätter state i min useEffect så krävs en extra render (useEffect är async och körs efter den nya DOMen ritats ut), vilket ju påverkar prestanda om det används för mycket). Men med detta fick jag en chans att prova på useEffect.
+  const [willRender, setWillRender] = useState(false);
+  useEffect(() => setWillRender(true), []);
   return (
-    <div>
-      {/* Om arrayen innehåller något skrivs det annars skrivs meddelande */}
-      {searchResults.length > 0
-        ? searchResults.map((result) => (
-            <Item
-              onHandleAdd={onHandleAdd}
-              key={result.name}
-              searchResult={result}
-            />
-          ))
-        : "no result"}
+    <div className="search-results">
+      {/* Om arrayen innehåller något skrivs det annars skrivs meddelande att sök inte gav träff */}
+      {/* varje sökresultat (objekt) mappas till en instans av Item-komponenten och skickar med objektet som prop */}
+      {searchResults.length > 0 ? (
+        searchResults.map((result) => (
+          <Item
+            onHandleAdd={onHandleAdd}
+            key={result.name}
+            searchResult={result}
+          />
+        ))
+      ) : willRender ? (
+        <NoResult />
+      ) : null}
     </div>
   );
+}
+
+function NoResult() {
+  return <p>Sorry, couldn't find that 😩</p>;
 }
 
 function Item({ searchResult, onHandleAdd }) {
@@ -161,15 +182,15 @@ function Item({ searchResult, onHandleAdd }) {
 // // // // // // // // // //
 // // // COMPONENT // // //
 // // // // // // // // //
-function ResultBox({ chosen }) {
+function ChosenResultBox({ chosen }) {
   const totalCarbs = chosen.reduce(
     (acc, curr) => acc + curr.carbohydrates_total_g,
     0
   );
   return (
-    <div>
-      {chosen.map((item, i) => (
-        <div key={item.name + i}>
+    <section>
+      {chosen.map((item) => (
+        <div key={item.name}>
           <div>
             {item.name}
             {item.serving_size_g}g
@@ -178,6 +199,6 @@ function ResultBox({ chosen }) {
         </div>
       ))}
       <h2>{totalCarbs.toFixed(1)}</h2>
-    </div>
+    </section>
   );
 }
