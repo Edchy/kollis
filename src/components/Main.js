@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "./minicomponents/Button";
 import NoResult from "./minicomponents/NoResult";
 
@@ -37,7 +37,7 @@ export default function Main() {
   return (
     <main className="main">
       {" "}
-      <SearchResultsBox onHandleAdd={handleAdd} onSetChosen={setChosen} />
+      <SearchResultsBox onHandleAdd={handleAdd} setChosen={setChosen} />
       <ChosenResultBox onHandleDelete={handleDelete} chosen={chosen} />
     </main>
   );
@@ -46,43 +46,17 @@ export default function Main() {
 // // // // // // // // // //
 // // // COMPONENT // // //
 // // // // // // // // //
-function SearchResultsBox({ onHandleAdd, onSetChosen }) {
+function SearchResultsBox({ onHandleAdd, setChosen }) {
   const [searchResults, setSearchResults] = useState([]);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [query, setQuery] = useState("");
 
   // Hämtadata funktionen deklareras
-  async function fetchData(q) {
-    // Visar att datan laddar
-    setIsLoading(true);
-    const url = "https://api.calorieninjas.com/v1/nutrition?query=" + q;
-    try {
-      const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Api-Key": "OnOOnBzJskNHQToKj+jVlg==7c0VISHeXUUmy9Sz",
-        },
-      });
-      // Kasta ny error om response INTE är OK.
-      if (!response.ok)
-        throw new Error(`There was an error fetching your search`);
-
-      const data = await response.json();
-      console.log(data);
-      // sätter "searchResults" state till fetch resultatet
-      setSearchResults(data.items);
-    } catch (error) {
-      setError(error.message);
-      // När allt är klart finns ett resultat och "loading state" sätts till false
-    } finally {
-      setIsLoading(false);
-    }
-  }
   async function getData(q) {
     // Visar att datan laddar
     setIsLoading(true);
+    // setError("");
     const url = "https://api.calorieninjas.com/v1/nutrition?query=" + q;
     try {
       const response = await fetch(url, {
@@ -106,18 +80,26 @@ function SearchResultsBox({ onHandleAdd, onSetChosen }) {
       setIsLoading(false);
     }
   }
-
+  // func för
   function handleQuickAdd() {
     // onSetChosen((prev) => [...prev, ...data.items]);
-    // onSetChosen(data.items);
-    // setSearchResults(getData(query));
+    if (query) {
+      getData(query).then((data) => {
+        setChosen(data.items);
+      });
+    }
+    setQuery("");
   }
 
   // Funktion för när searchform submittas (Enter eller search(submit) knapp trycks)
   function handleSubmit(e) {
     e.preventDefault();
-    // funktionen anropar datahämtningsfunktionen med det som skrivs i input, om något skrivits in.
-    if (query) fetchData(query);
+    // om något skrivits in, anropa hämtadatafunktion med det som skrivits in som param, sätter searchresult state till datan.
+    if (query) {
+      getData(query).then((data) => {
+        setSearchResults(data.items);
+      });
+    }
     // "resetta" input state
     setQuery("");
   }
@@ -130,13 +112,23 @@ function SearchResultsBox({ onHandleAdd, onSetChosen }) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           type="text"
-          placeholder="Enter foods 🥞 and/or drinks 🥤..."
+          placeholder="Search food & drink..."
         />
         <div className="form-buttons">
-          <Button type="submit">Search</Button>
-          <Button onClick={() => {}} type="button">
-            Quick Add
+          <Button className="" type="submit">
+            Search
           </Button>
+          <div className="info">
+            <Button className="" onClick={handleQuickAdd} type="button">
+              Quick Add
+            </Button>
+            <div className="info-circle">
+              💡
+              <div class="info-box">
+                Information about what happens when you click the button.
+              </div>
+            </div>
+          </div>
         </div>
       </form>
       {/* Conditional rendering */}
@@ -175,7 +167,8 @@ function SearchResultsBox({ onHandleAdd, onSetChosen }) {
 
 function SearchResultsList({ searchResults, onHandleAdd }) {
   // Använder state, useEffect samt conditional rendering för att rendera komponenten NoResult endast EFTER den initiala renderingen. Anledningen är att texten om att sökresultat inte gav något svar annars visas direkt. Känns som att det skulle kunna lösas snyggare/effektivare (eftersom jag sätter state i min useEffect så krävs en extra render (useEffect är async och körs efter den nya DOMen ritats ut), vilket ju påverkar prestanda om det används för mycket). Men med detta fick jag en chans att prova på useEffect.
-
+  const [x, setX] = useState("");
+  useEffect(() => setX("yo"), [searchResults]);
   // BEHÖVER FIXAS
 
   return (
@@ -191,7 +184,7 @@ function SearchResultsList({ searchResults, onHandleAdd }) {
           />
         ))
       ) : (
-        <NoResult>Sorry, couldn't find that 😩</NoResult>
+        <NoResult>{x}</NoResult>
       )}
     </div>
   );
@@ -236,7 +229,7 @@ function Item({ searchResult, onHandleAdd }) {
           })
         }
       >
-        ADD
+        ➕
       </Button>
     </article>
   );
