@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import Button from "./minicomponents/Button";
 import NoResult from "./minicomponents/NoResult";
+import InfoCircle from "./InfoCircle";
+import SlideUp from "./SlideUp";
 
 // // // // // // // // // //
 // // // COMPONENT // // //
@@ -123,7 +125,7 @@ function SearchResultsBox({ onHandleAdd, setChosen }) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           type="text"
-          placeholder="Search food & drink..."
+          placeholder="Search food & drink...lb, g, kg, oz,"
         />
         <div className="form-buttons">
           <Button className="" type="submit">
@@ -142,7 +144,17 @@ function SearchResultsBox({ onHandleAdd, setChosen }) {
             <p>
               Using Quick Add lets you quickly add multiple foods and drinks at
               once. <br />
-              Simply enter name and amount of what you want to add.
+              Simply enter the amount followed by a space and the name of the
+              item that you want to add. <br />
+              <br />
+              <em>example: 200g pasta 1 apple and a turkey sandwich</em>
+            </p>
+            <br />
+            <p>
+              <strong>Note!</strong> not explicitly specifying the weight of the
+              item that you want can lead to less accurate results. Always
+              double check the results from a reliable resource like for example{" "}
+              <em>the USDA.</em>
             </p>
           </InfoCircle>
         </div>
@@ -168,7 +180,7 @@ function SearchResultsList({ searchResults, onHandleAdd }) {
   // BEHÖVER FIXAS
 
   return (
-    <div className="search-results">
+    <ul className="search-results">
       {/* Om arrayen innehåller något skrivs det annars skrivs meddelande att sök inte gav träff */}
       {/* varje sökresultat (objekt) mappas till en instans av Item-komponenten och skickar med objektet som prop */}
       {searchResults.length > 0 ? (
@@ -182,7 +194,7 @@ function SearchResultsList({ searchResults, onHandleAdd }) {
       ) : (
         <NoResult>{x}</NoResult>
       )}
-    </div>
+    </ul>
   );
 }
 
@@ -194,22 +206,21 @@ function Item({ searchResult, onHandleAdd }) {
   let carbs =
     searchResult.carbohydrates_total_g * (grams / searchResult.serving_size_g);
   return (
-    <article>
+    <li>
       <h3>{searchResult.name}</h3>
-      <div>
-        Grams: {/* Controlled element */}
-        <input
-          type="number"
-          min="0"
-          max="400"
-          step="10"
-          value={grams}
-          // Value castas om till nummer
-          onChange={(e) => setGrams(Number(e.target.value))}
-        />
-      </div>
-      <div>Carbs: {carbs.toFixed(1)}</div>
-
+      <label htmlFor="grams">Grams:</label>
+      {/* Controlled element */}
+      <input
+        id="grams"
+        type="number"
+        min="0"
+        max="4000"
+        step="10"
+        value={grams}
+        // Value castas om till nummer
+        onChange={(e) => setGrams(Number(e.target.value))}
+      />
+      <p>Carbs: {carbs.toFixed(1)}</p>
       {/* Här har det "prop-drillats" ordentligt. handleAdd har skickats ner genom många komponenter. Endast för att användas här (kan lösas bättre kanske?) i komponentens onClick prop. Funktionen tar ett nytt objekt som parameter och kopierar in alla properties från objektet som skickades in som prop till Item-komponenten. Men totala kolhydrater och serving-size propertiesen skrivs över med de nya användar-uppdaterade värdena */}
       <Button
         onClick={() =>
@@ -222,7 +233,7 @@ function Item({ searchResult, onHandleAdd }) {
       >
         ➕
       </Button>
-    </article>
+    </li>
   );
 }
 // // // // // // // // // //
@@ -239,35 +250,21 @@ function ChosenResultBox({ chosen, onHandleDelete }) {
 
   return (
     <section>
-      {/* "mappar ut" varje objekts olika properties till HTML-element */}
-      {chosen.map((item) => (
-        <div key={item.name}>
-          <div>
-            {item.name}
-            {item.serving_size_g}g
-          </div>
-          <div>{item.carbohydrates_total_g}</div>
-          {/* varje objekt får en knapp, där funktionen för delete skickas in som prop. Funktionen tar objektet som parameter och filtrerar bort detta i handleDelete funktionen */}
-          <Button onClick={() => onHandleDelete(item)}>❌</Button>
-        </div>
-      ))}
-      <h2>{totalCarbs.toFixed(1)}</h2>
+      <ul>
+        {/* "mappar ut" varje objekts olika properties till HTML-element */}
+        {chosen.map((item) => (
+          <li key={item.name}>
+            <h3>
+              {item.name} <span>{item.serving_size_g}g</span>
+            </h3>
+            <p>{item.carbohydrates_total_g}</p>
+            {/* varje objekt får en knapp, där funktionen för delete skickas in som prop. Funktionen tar objektet som parameter och filtrerar bort detta i handleDelete funktionen */}
+            <Button onClick={() => onHandleDelete(item)}>❌</Button>
+          </li>
+        ))}
+        <h2>{totalCarbs.toFixed(1)}</h2>
+        <SlideUp />
+      </ul>
     </section>
-  );
-}
-
-// komponent som visar upp en info-text. tar {children} och en annan komponent som prop (för vilken info-texten ska gälla)
-function InfoCircle({ children, component }) {
-  return (
-    <div className="info">
-      {component}
-      <div className="info-circle">
-        💡
-        <div className="infotext-box">
-          <h2 style={{ textAlign: "center", fontSize: "1rem" }}>💡</h2>
-          {children}
-        </div>
-      </div>
-    </div>
   );
 }

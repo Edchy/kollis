@@ -1,0 +1,12 @@
+
+To convert from grams to centiliters, you need to know the density of the substance you're measuring, as the conversion depends on it. For water and most liquids similar to water in density, 1 gram is approximately equal to 1 milliliter (ml). However, the density of soda like Fanta might be slightly different due to the sugar and carbonation.
+
+Assuming Fanta has a density close to water, here's the rough conversion:
+
+300 grams of Fanta would be approximately equal to 300 milliliters.
+Since there are 10 milliliters in a centiliter, 300 milliliters would be equal to 30 centiliters (cl).
+So yes, 300 grams of Fanta would approximately amount to 30cl, assuming its density is similar to water. However, for more precise culinary or scientific purposes, you might want to consider the specific density of the liquid you're working with.
+
+
+
+lb, kg, g, oz amount ( 1 aplle for example) NLG natural language
