@@ -1,0 +1,6 @@
+aside {
+  grid-area: aside;
+  background-color: var(--color-brand-tertiary);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
