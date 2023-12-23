@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import "./button.css";
 
 // återanvändbar Knapp som tar children, onClick-funktion, class, och type som props
 

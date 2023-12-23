@@ -1,6 +1,11 @@
 :root {
-  --color-dark: #494946;
+  --color-dark-700: #232326;
+  --color-dark-500: #333337;
+  --color-dark-300: #4b4b51;
   --color-light: #dededa;
+  --color-brand-primary: #a4d66c;
+  --color-brand-secondary: #e44025;
+  --color-brand-tertiary: #4a9aad;
   --radius: 0.5rem;
 }
 
@@ -12,9 +17,9 @@
 }
 
 #root {
-  width: 90%;
-  max-width: 1100px;
-  margin-inline: auto;
+  /* width: 90%;
+  margin-inline: auto; */
+  /* max-width: 1100px; */
   height: 100vh;
   display: grid;
   grid-template-areas:
@@ -22,21 +27,23 @@
     "aside aside"
     "main main"
     "foot foot";
-  grid-template-rows: 100px 20px 1fr 100px;
+  grid-template-rows: 75px auto 1fr auto;
 }
 ul {
   list-style: none;
 }
-.main {
-  grid-area: main;
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  gap: 1rem;
-}
 
 /* Component = SearchResultsList */
 .search-results-box {
-  background-color: #c5c5c2;
+  background-color: var(--color-dark-700);
+  border-radius: var(--radius);
+  height: 80vh;
+  /* Ändra overflow för att låta searchbar sticka ut */
+  overflow: scroll;
+  /* padding: 0 1rem; */
+  @media (max-width: 768px) {
+    height: auto;
+  }
 }
 .search-form {
   display: flex;
@@ -47,31 +54,21 @@ ul {
   border: none;
   display: block;
   padding: 1rem 1.5rem;
-  font-size: 1.5rem;
+  font-size: 1rem;
   border-radius: var(--radius);
-  width: 75%;
+  width: 90%;
+  max-width: 500px;
   transition: box-shadow 0.2s, transform 0.2s;
   color: green;
-  background-color: rgb(222, 205, 205);
 }
 
 .search::placeholder {
   color: gray;
 }
 
-.btn {
-  border: none;
-  border-radius: var(--radius);
-  cursor: pointer;
-  padding: 0.25rem 0.5rem;
-}
-.btn:hover {
-  opacity: 0.75;
-}
-
 .form-buttons {
   display: flex;
-  gap: 0.25rem;
+  gap: 0.5rem;
   margin-top: 0.25rem;
 }
 
@@ -89,56 +86,88 @@ ul {
   transform: translateY(5px);
   margin-inline: 0.5rem;
 }
-.info {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-.info-circle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  width: 15px;
-  height: 15px;
-  font-size: 0.75rem;
-  border-radius: 50%;
-  border: 1px dotted white;
-  text-align: center;
-  cursor: pointer;
-  position: relative;
-}
 
-.infotext-box {
-  display: none;
-  position: absolute;
-  width: 200px;
-  top: 50%;
-  left: 100%;
-  margin-left: 10px;
-  padding: 10px;
-  color: black;
-  font-size: 0.675rem;
-  text-align: left;
+.search-results {
+  display: grid;
+  margin-top: 3rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.search-results .nutrient {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 0;
+  /* justify-self: center; */
+  /* width: 50%; */
+  /* border-left: 1px solid white;
+    border-bottom: 1px solid white; */
+  border-radius: var(--radius);
+
+  .nutrient-info {
+    /* padding: 1rem; */
+    /* & input {
+      border: none;
+      background-color: var(--color-brand-tertiary);
+      border-radius: var(--radius);
+      padding: 0.25rem 0.5rem;
+    } */
+  }
+  .nutrient-title {
+    /* text-align: center; */
+    text-transform: capitalize;
+    padding: 1rem;
+  }
+
+  .add-btn {
+    height: 100%;
+    aspect-ratio: 1;
+  }
 }
 
-.info-circle:hover .infotext-box {
-  display: block;
+/* UserNutrientListColumn COMPONENT */
+.user-list-column {
+  position: relative;
+  background-color: var(--color-dark-700);
+  border-radius: var(--radius);
+  color: var(--color-brand-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 80vh;
+  overflow: scroll;
+  /* padding-bottom: 3rem; */
+  @media (max-width: 768px) {
+    height: auto;
+  }
 }
 
-.slide-up {
-  background-color: rgb(47, 41, 42);
-  height: 300px;
-  width: 200px;
-  position: fixed;
-  bottom: -300px;
-  left: 50px;
-  right: 0;
-  transition: bottom 0.5s ease-in-out;
+.user-list-item {
+  font-size: 0.875rem;
+  text-transform: capitalize;
+  /* padding: 1rem; */
+  border-bottom: 1px solid gray;
+  padding: 0.75rem 0.5rem;
+  display: flex;
+  justify-content: space-between;
+
+  & h3 span {
+    font-size: 0.75rem;
+  }
+  .item-carbs {
+    font-size: 1.125rem;
+    font-weight: bold;
+  }
+  .delete-btn {
+    background-color: transparent;
+  }
 }
 
-.visible {
-  bottom: 0px;
+.total-carbs-box {
+  background-color: var(--color-dark-500);
+  position: sticky;
+  bottom: 0;
 }
+
+/*  */

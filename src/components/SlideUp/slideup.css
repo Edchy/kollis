@@ -1,0 +1,14 @@
+.slide-up {
+  background-color: rgb(47, 41, 42);
+  height: 300px;
+  width: 200px;
+  position: fixed;
+  bottom: -300px;
+  left: 50px;
+  right: 0;
+  transition: bottom 0.5s ease-in-out;
+}
+
+.visible {
+  bottom: 0px;
+}

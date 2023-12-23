@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import Button from "../Button/Button";
+import "./slideup.css";
 
 export default function SlideUp() {
   const [isShowing, setIsShowing] = useState(false);
@@ -11,5 +13,9 @@ export default function SlideUp() {
     return () => clearTimeout(timer);
   }, []);
 
-  return <div className={`slide-up ${isShowing ? "visible" : ""}`}>bb</div>;
+  return (
+    <div className={`slide-up ${isShowing ? "visible" : ""}`}>
+      <Button onClick={() => setIsShowing(false)}>X</Button>
+    </div>
+  );
 }
