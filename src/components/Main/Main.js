@@ -219,7 +219,12 @@ function NumberInput({ grams, setGrams, title }) {
   return (
     <div className="number-input">
       <label htmlFor={title}>{title}:</label>
-      <Button onClick={() => setGrams((prev) => prev - 10)}>➖</Button>
+      <Button
+        className="number-control-btn"
+        onClick={() => setGrams((prev) => prev - 10)}
+      >
+        ➖
+      </Button>
       {/* Controlled element */}
       <input
         id={title}
@@ -230,7 +235,12 @@ function NumberInput({ grams, setGrams, title }) {
         // Value castas om till nummer
         onChange={(e) => setGrams(Number(e.target.value))}
       />
-      <Button onClick={() => setGrams((prev) => prev + 10)}>➕</Button>
+      <Button
+        className="number-control-btn"
+        onClick={() => setGrams((prev) => prev + 10)}
+      >
+        ➕
+      </Button>
     </div>
   );
 }

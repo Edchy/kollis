@@ -1,11 +1,12 @@
 :root {
   --color-dark-700: #16161a;
-  /* --color-dark-500: #333337; */
+  --color-dark-500: #333337;
   --color-dark-300: #94a1b2;
   --color-light: #fffffe;
   --color-brand-primary: #7f5af0;
   --color-brand-secondary: #2cb67d;
   --color-brand-tertiary: #37e3e6;
+  --color-donut: #feab67;
   --radius: 0.5rem;
 }
 
@@ -44,7 +45,7 @@ ul {
   height: 80vh;
   /* Ändra overflow för att låta searchbar sticka ut */
   overflow: scroll;
-  padding: 0.75rem 1rem;
+  padding: 2rem 1rem 0;
   @media (max-width: 768px) {
     height: auto;
   }
@@ -62,12 +63,13 @@ ul {
   border-radius: var(--radius);
   width: 90%;
   max-width: 500px;
-  transition: box-shadow 0.2s, transform 0.2s;
-  color: green;
+  transition: box-shadow 0.4s, transform 0.4s;
+  color: var(--color-light);
+  background-color: var(--color-dark-500);
 }
 
 .search::placeholder {
-  color: gray;
+  color: var(--color-dark-300);
 }
 
 .form-buttons {
@@ -78,10 +80,10 @@ ul {
 
 .form-buttons > * {
   /* transform: translateY(-3px); */
-  transition: all 0.2s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }
 .search:focus {
-  outline: none;
+  outline: 1px solid var(--color-brand-secondary);
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
   transform: translateY(-6px);
 }
@@ -104,7 +106,7 @@ ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
+  background-color: var(--color-dark-500);
   padding: 0;
   /* justify-self: center; */
   /* width: 50%; */
@@ -122,19 +124,24 @@ ul {
     /* text-align: center; */
     text-transform: capitalize;
     font-size: 1.5rem;
-    /* padding: 1rem; */
+    color: var(--color-light);
   }
   .number-input {
     display: flex;
     align-items: center;
     gap: 0.5rem;
 
+    .number-control-btn {
+      color: var(--color-light);
+      background-color: var(--color-brand-primary);
+    }
+
     & input {
       border: none;
       width: 25%;
       font-size: 1rem;
       padding: 0.2rem 0.55rem;
-      background-color: gray;
+      background-color: var(--color-light);
       border-radius: var(--radius);
       caret-color: var(--color-brand-primary);
     }
@@ -152,6 +159,7 @@ ul {
   .add-btn {
     height: 100%;
     aspect-ratio: 1;
+    background-color: var(--color-brand-secondary);
   }
 }
 
