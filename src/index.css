@@ -106,18 +106,26 @@ ul {
   border-radius: var(--radius);
 
   .nutrient-info {
-    /* padding: 1rem; */
-    /* & input {
-      border: none;
-      background-color: var(--color-brand-tertiary);
-      border-radius: var(--radius);
-      padding: 0.25rem 0.5rem;
-    } */
+    padding: 1rem;
   }
   .nutrient-title {
     /* text-align: center; */
     text-transform: capitalize;
-    padding: 1rem;
+    font-size: 1.5rem;
+    /* padding: 1rem; */
+  }
+  .number-input {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  & input {
+    border: none;
+    width: 25%;
+    font-size: 1.125rem;
+    padding: 0.2rem 0.55rem;
+    background-color: gray;
+    border-radius: var(--radius);
   }
 
   .add-btn {

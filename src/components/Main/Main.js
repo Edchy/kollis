@@ -215,7 +215,25 @@ function SearchResultsList({ searchResults, onHandleAdd }) {
     </ul>
   );
 }
-
+function NumberInput({ grams, setGrams, title }) {
+  return (
+    <div className="number-input">
+      <label htmlFor={title}>{title}:</label>
+      <Button onClick={() => setGrams((prev) => prev - 10)}>➖</Button>
+      {/* Controlled element */}
+      <input
+        id={title}
+        min="0"
+        max="4000"
+        step="10"
+        value={grams}
+        // Value castas om till nummer
+        onChange={(e) => setGrams(Number(e.target.value))}
+      />
+      <Button onClick={() => setGrams((prev) => prev + 10)}>➕</Button>
+    </div>
+  );
+}
 function Nutrient({ searchResult, onHandleAdd }) {
   // definierar state för att kunna via input låta användaren välja antal gram att lägga till.
   // sätts initialt till objektets värde för serving-size (default 100g)
@@ -227,19 +245,18 @@ function Nutrient({ searchResult, onHandleAdd }) {
     <li className="nutrient">
       <div className="nutrient-info">
         <h3 className="nutrient-title">{searchResult.name}</h3>
-        <label htmlFor="grams">Grams:</label>
-        {/* Controlled element */}
-        <input
+
+        <NumberInput title="Grams" grams={grams} setGrams={setGrams} />
+        {/* <input
           id="grams"
           type="number"
           min="0"
           max="4000"
           step="10"
           value={grams}
-          // Value castas om till nummer
           onChange={(e) => setGrams(Number(e.target.value))}
-        />
-        <p>Carbs: {carbs.toFixed(1)}</p>
+        /> */}
+        <p>Carbs: {carbs.toFixed(1)}g</p>
       </div>
       {/* Här har det "prop-drillats" ordentligt. handleAdd har skickats ner genom många komponenter. Endast för att användas här (kan lösas bättre kanske?) i komponentens onClick prop. Funktionen tar ett nytt objekt som parameter och kopierar in alla properties från objektet som skickades in som prop till Item-komponenten. Men totala kolhydrater och serving-size propertiesen skrivs över med de nya användar-uppdaterade värdena */}
       <Button
