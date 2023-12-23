@@ -256,7 +256,9 @@ function Nutrient({ searchResult, onHandleAdd }) {
           value={grams}
           onChange={(e) => setGrams(Number(e.target.value))}
         /> */}
-        <p>Carbs: {carbs.toFixed(1)}g</p>
+        <p>
+          Carbs: <span className="nutrient-total">{carbs.toFixed(1)}g</span>
+        </p>
       </div>
       {/* Här har det "prop-drillats" ordentligt. handleAdd har skickats ner genom många komponenter. Endast för att användas här (kan lösas bättre kanske?) i komponentens onClick prop. Funktionen tar ett nytt objekt som parameter och kopierar in alla properties från objektet som skickades in som prop till Item-komponenten. Men totala kolhydrater och serving-size propertiesen skrivs över med de nya användar-uppdaterade värdena */}
       <Button
@@ -288,7 +290,7 @@ function UserNutrientListColumn({ userList, onHandleDelete }) {
 
   return (
     <section className="user-list-column">
-      <ul>
+      <ul className="user-list">
         {/* "mappar ut" varje objekts olika properties till HTML-element */}
         {userList.map((item) => (
           <li className="user-list-item" key={item.name}>
@@ -308,7 +310,8 @@ function UserNutrientListColumn({ userList, onHandleDelete }) {
         ))}
       </ul>
       <div className="total-carbs-box">
-        <h2>{totalCarbs.toFixed(1)}</h2>
+        <p>total</p>
+        <h2>{totalCarbs.toFixed(1)}g</h2>
       </div>
     </section>
   );
