@@ -3,4 +3,23 @@ aside {
   background-color: var(--color-brand-primary);
   border-radius: var(--radius);
   padding: 1rem;
+  display: flex;
+  gap: 2rem;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 0.75rem;
+  color: var(--color-light);
+
+  & input {
+    width: 30px;
+    border: none;
+    border-radius: var(--radius);
+    text-align: center;
+    padding: 4px;
+    background-color: var(--color-dark-500);
+    color: var(--color-light);
+  }
+  .switch {
+    margin-left: auto;
+  }
 }

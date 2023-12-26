@@ -10,3 +10,7 @@ So yes, 300 grams of Fanta would approximately amount to 30cl, assuming its dens
 
 
 lb, kg, g, oz amount ( 1 aplle for example) NLG natural language
+
+
+let user change theme
+let user change 500 300 och 100 regeln 

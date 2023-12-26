@@ -3,4 +3,6 @@
   grid-area: foot;
   display: grid;
   place-content: center;
+  padding: 1rem;
+  border-radius: var(--radius);
 }

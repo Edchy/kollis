@@ -5,8 +5,10 @@
   padding: 0.25rem 0.5rem;
 }
 
-.search-btn,
-.quickadd-btn {
+.search-btn {
+}
+.quickadd-btn:focus {
+  outline: 1px solid white;
 }
 
 .primary-btn,

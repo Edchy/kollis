@@ -1,0 +1,5 @@
+.no-result {
+  color: var(--color-light);
+  grid-column: 1 / 3;
+  text-align: center;
+}

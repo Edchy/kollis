@@ -2,16 +2,16 @@ import { useEffect, useState } from "react";
 import Button from "../Button/Button";
 import NoResult from "../NoResult/NoResult";
 import InfoCircle from "../InfoCircle/InfoCircle";
+import Loader from "../Loader/Loader";
 import "./main.css";
 // import SlideUp from "./SlideUp/SlideUp";
 
 // // // // // // // // // //
 // // // COMPONENT // // //
 // // // // // // // // //
-export default function Main() {
+export default function Main({ bloodSugar, dailyInsulin, isBreakfastToggled }) {
   // state för de livsmedel som användaren lägger till i sin "lista". initialt en tom array.
   const [userList, setUserList] = useState([]);
-  const [sectionVisible, setSectionVisible] = useState(true);
 
   // tar objekt som ska tas bort som argument. anropar state-sättar funktionen för listan.
   // filtrerar listan och returnerar endast de objekt vars name inte är samma som det som skickades med som argument
@@ -51,12 +51,13 @@ export default function Main() {
         onHandleAdd={handleAdd}
         setUserList={setUserList}
       />
-      {sectionVisible && (
-        <UserNutrientListColumn
-          onHandleDelete={handleDelete}
-          userList={userList}
-        />
-      )}
+      <UserNutrientListColumn
+        onHandleDelete={handleDelete}
+        userList={userList}
+        bloodSugar={bloodSugar}
+        dailyInsulin={dailyInsulin}
+        isBreakfastToggled={isBreakfastToggled}
+      />
     </main>
   );
 }
@@ -69,6 +70,8 @@ function SearchAndResultsColumn({ onHandleAdd, setUserList }) {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [query, setQuery] = useState("");
+  // searched skickas ner som prop till till searchResultsList. Agerar boolean för om komponenten NoResult ska renderars eller ej (conditional rendering). Sätts till true när funktionen handleSubmit körs. Hela syftet här är att endast rendera NoResult komponenten efter att man gjort en sökning och inte initialt när sidan har laddats. En lösning som visserligen fungerar men som skulle kunna göras på ett enklare sätt.
+  const [searched, setSearched] = useState(false);
 
   // Hämtadata funktionen deklareras
   async function getData(q) {
@@ -124,6 +127,7 @@ function SearchAndResultsColumn({ onHandleAdd, setUserList }) {
     }
 
     setQuery("");
+    setSearched(true);
   }
   return (
     <section className="search-results-box">
@@ -176,32 +180,30 @@ function SearchAndResultsColumn({ onHandleAdd, setUserList }) {
       </form>
       {/* Conditional rendering */}
       {/* Endast om isLoading och error är false ritas SearchResultsListan ut */}
-      {isLoading && <p>loading...</p>}
+      {isLoading && <Loader />}
       {error && <p>{error}</p>}
       {!isLoading && !error && (
         <SearchResultsList
           onHandleAdd={onHandleAdd}
           searchResults={searchResults}
+          searched={searched}
         />
       )}
     </section>
   );
 }
 
-function SearchResultsList({ searchResults, onHandleAdd }) {
+function SearchResultsList({ searchResults, onHandleAdd, searched }) {
   // Använder state, useEffect samt conditional rendering för att rendera komponenten NoResult endast EFTER den initiala renderingen. Anledningen är att texten om att sökresultat inte gav något svar annars visas direkt. Känns som att det skulle kunna lösas snyggare/effektivare (eftersom jag sätter state i min useEffect så krävs en extra render (useEffect är async och körs efter den nya DOMen ritats ut), vilket ju påverkar prestanda om det används för mycket). Men med detta fick jag en chans att prova på useEffect.
-  const [x, setX] = useState("");
-  useEffect(
-    () => setX("Sorry! We've been searching the pantry, but couldn't find it"),
-    [searchResults]
-  );
+
+  // useEffect(() => setX(false), []); searched === false
   // BEHÖVER FIXAS
 
   return (
     <ul className="search-results">
       {/* Om arrayen innehåller något skrivs det annars skrivs meddelande att sök inte gav träff */}
-      {/* varje sökresultat (objekt) mappas till en instans av Item-komponenten och skickar med objektet som prop */}
-      {searchResults.length > 0 ? (
+      {/* varje sökresultat (objekt) mappas till en instans av Nutrient-komponenten och skickar med objektet som prop */}
+      {searchResults.length > 0 || !searched ? (
         searchResults.map((result) => (
           <Nutrient
             onHandleAdd={onHandleAdd}
@@ -210,7 +212,9 @@ function SearchResultsList({ searchResults, onHandleAdd }) {
           />
         ))
       ) : (
-        <NoResult>{x}</NoResult>
+        <NoResult emoji="😟" emojiSize="3">
+          Sorry! We've been searching the pantry, but couldn't find it
+        </NoResult>
       )}
     </ul>
   );
@@ -228,9 +232,9 @@ function NumberInput({ grams, setGrams, title }) {
       {/* Controlled element */}
       <input
         id={title}
-        min="0"
-        max="4000"
-        step="10"
+        // min="0"
+        // max="4000"
+        // step="10"
         value={grams}
         // Value castas om till nummer
         onChange={(e) => setGrams(Number(e.target.value))}
@@ -291,12 +295,33 @@ function Nutrient({ searchResult, onHandleAdd }) {
 // // // // // // // // //
 
 // visar upp listan för valda objekt
-function UserNutrientListColumn({ userList, onHandleDelete }) {
+function UserNutrientListColumn({
+  userList,
+  onHandleDelete,
+  dailyInsulin,
+  bloodSugar,
+  isBreakfastToggled,
+}) {
   // räkna ut totalt antal kolhydrater genom att plussa ihop alla värden för varje objekts property för antal kolhydrater
   const totalCarbs = userList.reduce(
     (acc, curr) => acc + curr.carbohydrates_total_g,
     0
   );
+  // ENHETER för att sänka
+  const idealBs = 6;
+  const corrFactor = 100 / dailyInsulin;
+  const corrDose =
+    bloodSugar > idealBs ? (bloodSugar - idealBs) / corrFactor : 0;
+  // console.log(corrDose.toFixed(1));
+
+  // 300 eller 500 regeln, hur många gram kolhydrater tar 1 enhet insulin hand om
+  const carbFactor = isBreakfastToggled
+    ? 300 / dailyInsulin
+    : 500 / dailyInsulin;
+  // console.log(carbFactor);
+  const insulinDose = totalCarbs / carbFactor + corrDose;
+  console.log(insulinDose.toFixed(1));
+  // console.log(isBreakfastToggled);
 
   return (
     <section className="user-list-column">
@@ -322,6 +347,7 @@ function UserNutrientListColumn({ userList, onHandleDelete }) {
       <div className="total-carbs-box">
         <p>total</p>
         <h2>{totalCarbs.toFixed(1)}g</h2>
+        <p>{insulinDose.toFixed(1)}U</p>
       </div>
     </section>
   );
