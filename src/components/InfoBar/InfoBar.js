@@ -26,7 +26,16 @@ export default function InfoBar({
             />
           </label>
         }
-      ></InfoCircle>
+      >
+        By entering your current bloodsugar (BS) here. Carboo will let you know
+        how much extra insuling is needed to get you down to your ideal BS
+        (which is 6 by default).
+        <br />
+        <br />
+        This is calculated by dividing your daily insulin by 100 according to
+        the rule-of-100. The resulting number is how many mmol/l 1 Unit of
+        insulin will lower your BS.
+      </InfoCircle>
       <InfoCircle
         direction="right"
         offset={-24}

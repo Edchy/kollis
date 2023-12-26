@@ -46,7 +46,12 @@ h3 {
 
 /* Component = SearchResultsList */
 .search-results-box {
-  background-color: var(--color-dark-700);
+  /* background-color: var(--color-dark-700); */
+  background: linear-gradient(90deg, var(--color-dark-700) 17px, transparent 1%)
+      50%,
+    linear-gradient(var(--color-dark-700) 17px, transparent 1%) 50%,
+    var(--color-brand-primary);
+  background-size: 18px 18px;
   border-radius: var(--radius);
   height: 80vh;
   /* Ändra overflow för att låta searchbar sticka ut */

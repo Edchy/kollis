@@ -20,3 +20,20 @@ give colors accoring to if much or little carbs, green, yellow, orange ,red
 add effect when user adds an item to the list
 
 carboo - carbcounting shouldnt be scary
+
+
+ONE ROUT - how to use. how to search.
+ONE ROUTE - page - tips n tricks
+
+Viktigt att tänka på med kolhydraträkning
+500-regeln, 300-regeln och 100-regeln är grova tumregler för hur mycket direktverkande insulin man behöver till en viss mängd kolhydrater. Dessa regler används både i Sverige och utomlands och de är mycket bra för att lära sig dosera insulin. I praktiken behöver man dock väga in fler saker utöver själva kolhydratmängden och man behöver ibland justera siffrorna 500, 300 och 100 så att de bättre passar just dig. Exempelvis kan siffran 450 vara lämpliga än 500 och detta är något som du lär dig med tiden (självklart skall du diskutera detta med din läkare och sjuksköterska).
+
+Kom ihåg att insulindosen påverkas av många faktorer, varav några är:
+
+Hur mycket man rör på sig före och efter måltiden.
+Blodsockret innan måltiden.
+Vilken typ av kolhydrater man äter. Om man äter snabba kolhydrater så kan blodsockret stiga fort även om man doserar rätt. Om man äter långsamma kolhydrater kan man faktiskt få ett blodsockerfall eftersom långsamma kolhydrater tar längre tid att ta upp.
+Upptag av insulin kan variera.
+Tänk också på följande
+Om ett barn som fått sin uträknade dos insulin inte äter upp den måltid som man beräknat dosen på är det viktigt att man kompenserar de missade kolhydraterna med smörgås eller frukt (motsvarande mängd kolhydrater som ej ätits) för att undvika för lågt blodsocker.
+Om beräkningen av insulindos resulterar i en siffra med decimaler så skall du avrunda till närmaste halva enhet.

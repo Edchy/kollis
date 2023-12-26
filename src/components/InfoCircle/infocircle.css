@@ -44,6 +44,7 @@
   /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
   z-index: 999;
   border-radius: var(--radius);
+  word-wrap: break-word;
   @media (max-width: 768px) {
     /* left: -3000px; overridden by inline style in component */
   }
