@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Toggle from "../Toggle/Toggle";
 import "./infobar.css";
+import InfoCircle from "../InfoCircle/InfoCircle";
 
 export default function InfoBar({
   setBloodSugar,
@@ -12,27 +13,49 @@ export default function InfoBar({
 }) {
   return (
     <aside>
-      <label>
-        BS:{" "}
-        <input
-          type="text"
-          onChange={(e) => setBloodSugar(e.target.value)}
-          value={bloodSugar}
-        />
-      </label>
+      <InfoCircle
+        direction="right"
+        offset={-24}
+        boxdirecion="left"
+        component={
+          <label>
+            BS:{" "}
+            <input
+              onChange={(e) => setBloodSugar(e.target.value)}
+              value={bloodSugar}
+            />
+          </label>
+        }
+      ></InfoCircle>
+      <InfoCircle
+        direction="right"
+        offset={-24}
+        boxdirecion="left"
+        component={
+          <label>
+            Daily Insulin:{" "}
+            <input
+              value={dailyInsulin}
+              onChange={(e) => setDailyInsulin(e.target.value)}
+            />
+          </label>
+        }
+      ></InfoCircle>
 
-      <label>
-        Daily Insulin:{" "}
-        <input
-          value={dailyInsulin}
-          onChange={(e) => setDailyInsulin(e.target.value)}
-        />
-      </label>
+      <InfoCircle
+        direction="left"
+        offset={-84}
+        boxdirecion="right"
+        component={
+          <Toggle
+            isBreakfastToggled={isBreakfastToggled}
+            setIsBreakfastToggled={setIsBreakfastToggled}
+          />
+        }
+      >
+        s{" "}
+      </InfoCircle>
 
-      <Toggle
-        isBreakfastToggled={isBreakfastToggled}
-        setIsBreakfastToggled={setIsBreakfastToggled}
-      />
       {/* <div>Your current BS: {bloodSugar}</div>
       <div>Your daily insulin: {dailyInsulin}</div> */}
     </aside>

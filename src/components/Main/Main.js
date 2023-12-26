@@ -148,6 +148,7 @@ function SearchAndResultsColumn({ onHandleAdd, setUserList }) {
 
           {/* InfoCircle tar emot en komponent(med props) som prop. Tyckte detta var rätt coolt att det gick att göra. Blir inte helt lättläsligt. Men jag ville att man ska kunna skriva in en textsträng som children-prop då detta ska vara en återanvändbar komponent där man lätt kan fylla på med vad man vill ha i den som children.*/}
           <InfoCircle
+            offset={-24}
             component={
               <Button
                 className="quickadd-btn secondary-btn"
@@ -213,7 +214,8 @@ function SearchResultsList({ searchResults, onHandleAdd, searched }) {
         ))
       ) : (
         <NoResult emoji="😟" emojiSize="3">
-          Sorry! We've been searching the pantry, but couldn't find it
+          Sorry! We've been searching the pantry, but couldn't find what you're
+          looking for.
         </NoResult>
       )}
     </ul>

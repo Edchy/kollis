@@ -14,3 +14,9 @@ lb, kg, g, oz amount ( 1 aplle for example) NLG natural language
 
 let user change theme
 let user change 500 300 och 100 regeln 
+
+give colors accoring to if much or little carbs, green, yellow, orange ,red
+
+add effect when user adds an item to the list
+
+carboo - carbcounting shouldnt be scary

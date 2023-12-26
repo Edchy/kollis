@@ -17,28 +17,40 @@
   text-align: center;
   cursor: pointer;
   position: absolute;
-  right: -24px;
+  /* right: -24px; */
+  .emoji {
+    font-size: 1.5rem;
+  }
+  & h4 {
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    text-align: center;
+  }
 }
 
 .infotext-box {
-  display: none;
-  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s ease-in-out;
   width: 200px;
-  top: 50%;
-  left: 100%;
-  margin-left: 10px;
-  padding: 10px;
-  color: black;
   font-size: 0.675rem;
+  position: absolute;
+  top: 100%;
+  /* margin-left: 20px; */
+  padding: 1rem 0.75rem 2rem;
+  color: var(--color-light);
+  background-color: var(--color-dark-500);
   text-align: left;
-  background-color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
+  z-index: 999;
+  border-radius: var(--radius);
   @media (max-width: 768px) {
-    top: 200%;
-    left: -200px;
+    /* left: -3000px; overridden by inline style in component */
   }
 }
 
 .info-circle:hover .infotext-box {
-  display: block;
+  visibility: visible; /* Show on hover */
+  opacity: 1; /* Full opacity */
+  transition-delay: 0s;
 }
