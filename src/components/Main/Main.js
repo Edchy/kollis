@@ -54,6 +54,7 @@ export default function Main({ bloodSugar, dailyInsulin, isBreakfastToggled }) {
       <UserNutrientListColumn
         onHandleDelete={handleDelete}
         userList={userList}
+        setUserList={setUserList}
         bloodSugar={bloodSugar}
         dailyInsulin={dailyInsulin}
         isBreakfastToggled={isBreakfastToggled}
@@ -299,6 +300,7 @@ function Nutrient({ searchResult, onHandleAdd }) {
 // visar upp listan för valda objekt
 function UserNutrientListColumn({
   userList,
+  setUserList,
   onHandleDelete,
   dailyInsulin,
   bloodSugar,
@@ -347,6 +349,14 @@ function UserNutrientListColumn({
         ))}
       </ul>
       <div className="total-carbs-box">
+        {userList.length > 1 && (
+          <Button
+            onClick={() => setUserList([])}
+            className="btn reset-list-btn"
+          >
+            clear all
+          </Button>
+        )}
         <p>total</p>
         <h2>{totalCarbs.toFixed(1)}g</h2>
         <p>{insulinDose.toFixed(1)}U</p>
