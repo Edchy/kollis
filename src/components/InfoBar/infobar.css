@@ -1,7 +1,7 @@
 aside {
   grid-area: aside;
   background-color: var(--color-brand-primary);
-  background: linear-gradient(
+  /* background: linear-gradient(
         90deg,
         var(--color-brand-primary) 17px,
         transparent 1%
@@ -9,7 +9,7 @@ aside {
       50%,
     linear-gradient(var(--color-brand-primary) 17px, transparent 1%) 50%,
     var(--color-brand-secondary);
-  background-size: 18px 18px;
+  background-size: 18px 18px; */
   border-radius: var(--radius);
   padding: 1rem;
   display: flex;

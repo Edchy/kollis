@@ -21,6 +21,9 @@
       margin-right: 4rem;
     }
   }
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 }
 
 .main-nav__logo {
@@ -37,5 +40,11 @@
   & p {
     font-size: 0.875rem;
     padding-left: 4px;
+  }
+  & img {
+    width: 90px;
+    @media (max-width: 768px) {
+      width: 50px;
+    }
   }
 }

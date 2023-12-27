@@ -306,6 +306,7 @@ function UserNutrientListColumn({
   bloodSugar,
   isBreakfastToggled,
 }) {
+  const [isScrolling, setIsScrolling] = useState(false);
   // räkna ut totalt antal kolhydrater genom att plussa ihop alla värden för varje objekts property för antal kolhydrater
   const totalCarbs = userList.reduce(
     (acc, curr) => acc + curr.carbohydrates_total_g,
@@ -327,6 +328,21 @@ function UserNutrientListColumn({
   console.log(insulinDose.toFixed(1));
   // console.log(isBreakfastToggled);
 
+  useEffect(() => {
+    let timeout;
+    const handleScroll = () => {
+      setIsScrolling(true);
+      clearTimeout(timeout);
+      timeout = setTimeout(() => setIsScrolling(false), 100);
+    };
+    const ref = document.querySelector(".user-list-column");
+    ref.addEventListener("scroll", handleScroll);
+    return () => {
+      ref.removeEventListener("scroll", handleScroll);
+      clearTimeout(timeout);
+    };
+  }, []);
+
   return (
     <section className="user-list-column">
       <ul className="user-list">
@@ -342,6 +358,7 @@ function UserNutrientListColumn({
               </p>
             </div>
             {/* varje objekt får en knapp, där funktionen för delete skickas in som prop. Funktionen tar objektet som parameter och filtrerar bort detta i handleDelete funktionen */}
+
             <Button className="delete-btn" onClick={() => onHandleDelete(item)}>
               ❌
             </Button>
@@ -350,12 +367,14 @@ function UserNutrientListColumn({
       </ul>
       <div className="total-carbs-box">
         {userList.length > 1 && (
-          <Button
-            onClick={() => setUserList([])}
-            className="btn reset-list-btn"
-          >
-            clear all
-          </Button>
+          <div style={{ opacity: isScrolling ? 0 : 1 }}>
+            <Button
+              onClick={() => setUserList([])}
+              className="btn reset-list-btn"
+            >
+              clear all
+            </Button>
+          </div>
         )}
         <p>total</p>
         <h2>{totalCarbs.toFixed(1)}g</h2>

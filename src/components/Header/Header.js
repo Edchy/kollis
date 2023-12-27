@@ -5,7 +5,7 @@ export default function Header() {
     <header className="main-header">
       <nav role="navigation" aria-label="Main Navigation" className="main-nav">
         <div className="main-nav__logo">
-          <img width="90px" src="logo3.png" alt="site logo" />
+          <img src="logo3.png" alt="site logo" />
           <div>
             <h1>Carboo</h1>
             <p>Spooktacular Carb Counting</p>
