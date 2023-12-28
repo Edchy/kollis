@@ -23,6 +23,6 @@
   outline: 1px solid var(--color-brand-primary);
   background-color: transparent;
 }
-.btn:hover {
+button:not(.reset-list-btn):hover {
   opacity: 0.75;
 }

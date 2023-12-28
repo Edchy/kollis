@@ -317,16 +317,13 @@ function UserNutrientListColumn({
   const corrFactor = 100 / dailyInsulin;
   const corrDose =
     bloodSugar > idealBs ? (bloodSugar - idealBs) / corrFactor : 0;
-  // console.log(corrDose.toFixed(1));
 
   // 300 eller 500 regeln, hur många gram kolhydrater tar 1 enhet insulin hand om
   const carbFactor = isBreakfastToggled
     ? 300 / dailyInsulin
     : 500 / dailyInsulin;
-  // console.log(carbFactor);
+
   const insulinDose = totalCarbs / carbFactor + corrDose;
-  console.log(insulinDose.toFixed(1));
-  // console.log(isBreakfastToggled);
 
   useEffect(() => {
     let timeout;
