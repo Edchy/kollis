@@ -15,10 +15,10 @@ export default function InfoCircle({
         style={{ [direction]: offset ? `${offset}px` : "0px" }}
         className="info-circle"
       >
-        💡
+        👻
         <div style={{ [boxdirecion]: "100%" }} className="infotext-box">
           <h4>
-            What's this? <span className="emoji">💁‍♂️</span>
+            What's this? <span className="emoji">👻</span>
           </h4>
           {children}
         </div>

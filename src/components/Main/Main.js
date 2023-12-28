@@ -325,6 +325,8 @@ function UserNutrientListColumn({
 
   const insulinDose = totalCarbs / carbFactor + corrDose;
 
+  // Koden i denna useEffect är ett samarbete mellan mig och chatGPT.
+  // När komponenten mountas körs denna. Jag skapar en referens till
   useEffect(() => {
     let timeout;
     const handleScroll = () => {
@@ -347,9 +349,9 @@ function UserNutrientListColumn({
         {userList.map((item) => (
           <li className="user-list-item" key={item.name}>
             <div>
-              <h3>
+              <h4>
                 {item.name} <span>{item.serving_size_g}g</span>
-              </h3>
+              </h4>
               <p className="item-carbs">
                 {item.carbohydrates_total_g.toFixed(1)}
               </p>
@@ -375,7 +377,7 @@ function UserNutrientListColumn({
         )}
         <p>total</p>
         <h2>{totalCarbs.toFixed(1)}g</h2>
-        <p>{insulinDose.toFixed(1)}U</p>
+        {dailyInsulin && <h3>{insulinDose.toFixed(1)}U</h3>}
       </div>
     </section>
   );
