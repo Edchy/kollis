@@ -18,7 +18,7 @@ export default function InfoCircle({
         👻
         <div style={{ [boxdirecion]: "100%" }} className="infotext-box">
           <h4>
-            What's this? <span className="emoji">👻</span>
+            Boo! What's this? <span className="emoji">👻</span>
           </h4>
           {children}
         </div>

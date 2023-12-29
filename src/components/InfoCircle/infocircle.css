@@ -32,26 +32,32 @@
   visibility: hidden;
   opacity: 0;
   transition: visibility 0s, opacity 0.5s ease-in-out;
-  width: 200px;
-  font-size: 0.675rem;
+  width: 300px;
   position: absolute;
   top: 100%;
   /* margin-left: 20px; */
   padding: 1rem 0.75rem 2rem;
-  color: var(--color-light);
-  background-color: var(--color-dark-500);
+  color: var(--color-dark-500);
+  background-color: var(--color-light);
   text-align: left;
-  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   z-index: 999;
   border-radius: var(--radius);
   word-wrap: break-word;
+  & p {
+    font-size: var(--step--2);
+  }
+  & a {
+    color: var(--color-light);
+  }
   @media (max-width: 768px) {
     /* left: -3000px; overridden by inline style in component */
+    width: 200px;
   }
 }
 
 .info-circle:hover .infotext-box {
   visibility: visible; /* Show on hover */
   opacity: 1; /* Full opacity */
-  transition-delay: 0s;
+  /* transition-delay: 0s; */
 }

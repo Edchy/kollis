@@ -150,6 +150,7 @@ function SearchAndResultsColumn({ onHandleAdd, setUserList }) {
           {/* InfoCircle tar emot en komponent(med props) som prop. Tyckte detta var rätt coolt att det gick att göra. Blir inte helt lättläsligt. Men jag ville att man ska kunna skriva in en textsträng som children-prop då detta ska vara en återanvändbar komponent där man lätt kan fylla på med vad man vill ha i den som children.*/}
           <InfoCircle
             offset={-24}
+            boxdirecion="right"
             component={
               <Button
                 className="quickadd-btn secondary-btn"
@@ -162,9 +163,8 @@ function SearchAndResultsColumn({ onHandleAdd, setUserList }) {
           >
             {" "}
             <p>
-              Using{" "}
-              <span style={{ textDecoration: "underline" }}>Quick Add</span>{" "}
-              lets you quickly add multiple foods and drinks at once. <br />
+              Using <em>Quick Add</em> lets you quickly add multiple foods and
+              drinks at once. <br />
               Simply enter the amount followed by a space and the name of the
               item that you want to add. <br />
               <br />
@@ -175,7 +175,7 @@ function SearchAndResultsColumn({ onHandleAdd, setUserList }) {
               <strong>Note!</strong> not explicitly specifying the weight of the
               item that you want can lead to less accurate results. Always
               double check the results from a reliable resource like for example{" "}
-              <em>the USDA.</em>
+              the <a href="https://www.usda.gov/">USDA.</a>
             </p>
           </InfoCircle>
         </div>

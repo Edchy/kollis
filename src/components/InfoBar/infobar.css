@@ -1,5 +1,6 @@
 aside {
   grid-area: aside;
+  position: relative;
   background-color: var(--color-brand-primary);
   /* background: linear-gradient(
         90deg,
@@ -26,7 +27,7 @@ aside {
     text-align: center;
     padding: 4px;
     background-color: var(--color-dark-500);
-    color: var(--color-brand-secondary);
+    color: var(--color-light);
     font-weight: bold;
   }
 
