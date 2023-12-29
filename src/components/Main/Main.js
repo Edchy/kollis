@@ -346,23 +346,30 @@ function UserNutrientListColumn({
     <section className="user-list-column">
       <ul className="user-list">
         {/* "mappar ut" varje objekts olika properties till HTML-element */}
-        {userList.map((item) => (
-          <li className="user-list-item" key={item.name}>
-            <div>
-              <h4>
-                {item.name} <span>{item.serving_size_g}g</span>
-              </h4>
-              <p className="item-carbs">
-                {item.carbohydrates_total_g.toFixed(1)}
-              </p>
-            </div>
-            {/* varje objekt får en knapp, där funktionen för delete skickas in som prop. Funktionen tar objektet som parameter och filtrerar bort detta i handleDelete funktionen */}
+        {userList.length > 0 ? (
+          userList.map((item) => (
+            <li className="user-list-item" key={item.name}>
+              <div>
+                <h4>
+                  {item.name} <span>{item.serving_size_g}g</span>
+                </h4>
+                <p className="item-carbs">
+                  {item.carbohydrates_total_g.toFixed(1)}
+                </p>
+              </div>
+              {/* varje objekt får en knapp, där funktionen för delete skickas in som prop. Funktionen tar objektet som parameter och filtrerar bort detta i handleDelete funktionen */}
 
-            <Button className="delete-btn" onClick={() => onHandleDelete(item)}>
-              ❌
-            </Button>
-          </li>
-        ))}
+              <Button
+                className="delete-btn"
+                onClick={() => onHandleDelete(item)}
+              >
+                ❌
+              </Button>
+            </li>
+          ))
+        ) : (
+          <p className="empty-text">empty</p>
+        )}
       </ul>
       <div className="total-carbs-box">
         {userList.length > 1 && (

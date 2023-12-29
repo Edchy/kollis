@@ -31,25 +31,32 @@
   align-items: center;
   gap: 0.5rem;
 
-  & h1 {
+  & h1,
+  span {
     font-size: var(--step-4);
     line-height: 0.75;
-    font-family: "Chubbo", sans-serif;
+    font-family: "Sharpie", sans-serif;
     text-transform: uppercase;
+    /* letter-spacing: 1px; */
+  }
+  & span {
+    color: var(--color-brand-primary);
   }
   & p {
-    font-size: var(--step--1);
+    font-size: var(--step--2);
     padding-left: 4px;
     /* text-transform: uppercase; */
     letter-spacing: 0.5px;
     @media (max-width: 768px) {
       text-align: center;
+      padding-left: 0;
+      display: none;
     }
   }
   & img {
     width: 90px;
     @media (max-width: 768px) {
-      width: 50px;
+      width: 60px;
     }
   }
 }

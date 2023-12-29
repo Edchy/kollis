@@ -1,4 +1,4 @@
-@import url("https://api.fontshare.com/v2/css?f[]=chubbo@700&display=swap");
+@import url("https://api.fontshare.com/v2/css?f[]=sharpie@700&display=swap");
 
 :root {
   --color-dark-700: #16161a;
@@ -9,6 +9,7 @@
   --color-brand-secondary: #2cb67d;
   --color-brand-tertiary: #37e3e6;
   --color-donut: #feab67;
+  --color-warning: rgb(244, 45, 45);
   --radius: 0.5rem;
 }
 /* @link https://utopia.fyi/type/calculator?c=375,16,1.25,1200,18,1.333,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l|3xs-xs&g=s,l,xl,12 */
@@ -43,15 +44,9 @@
     "foot foot";
   grid-template-rows: 100px auto 1fr auto;
 }
-/* html {
-  font-size: 16px;
-  @media (max-width: 768px) {
-    font-size: 14px;
-  }
-} */
+
 body {
   background-color: var(--color-light);
-  font-size: 100%;
 }
 
 ul {
@@ -70,6 +65,7 @@ h3 {
 
 /* Component = SearchResultsList */
 .search-results-box {
+  padding-inline: clamp(0.5rem, 0.2159rem + 1.2121vw, 1.125rem);
   background: linear-gradient(90deg, var(--color-dark-700) 17px, transparent 1%)
       50%,
     linear-gradient(var(--color-dark-700) 17px, transparent 1%) 50%,
@@ -242,6 +238,13 @@ h3 {
   flex-wrap: wrap;
   /* adjust PB */
   padding-bottom: 3rem;
+
+  .empty-text {
+    text-align: center;
+    width: 100%;
+    margin-top: 5rem;
+  }
+
   @media (max-width: 768px) {
     flex-direction: row;
     /* justify-content: center; */

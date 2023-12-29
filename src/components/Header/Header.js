@@ -7,8 +7,11 @@ export default function Header() {
         <div className="main-nav__logo">
           <img src="logo3.png" alt="site logo" />
           <div>
-            <h1>Carb-boo!</h1>
-            <p>A Spooktacular Carb-Counting App</p>
+            <h1>
+              Carb
+              <span>oo!</span>
+            </h1>
+            <p>Spooktacular Carb-Counting</p>
           </div>
         </div>
         <ul className="main-nav__list">

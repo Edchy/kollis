@@ -12,13 +12,18 @@ aside {
     var(--color-brand-secondary);
   background-size: 18px 18px; */
   border-radius: var(--radius);
-  padding: 1rem;
+  padding: 1rem 3rem 1rem 1rem;
   display: flex;
   gap: 4rem;
   justify-content: flex-start;
   align-items: center;
   font-size: var(--step--2);
   color: var(--color-light);
+
+  @media (max-width: 468px) {
+    padding: 1rem 2rem 1rem 0.5rem;
+    gap: 2rem;
+  }
 
   & input {
     width: 40px;

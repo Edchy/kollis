@@ -25,7 +25,7 @@ export default function InfoBar({
       BSColor = "orange";
       break;
     default:
-      BSColor = "red";
+      BSColor = "var(--color-warning)";
   }
 
   return (
@@ -78,8 +78,8 @@ export default function InfoBar({
       </InfoCircle>
 
       <InfoCircle
-        direction="left"
-        offset={-84}
+        direction="right"
+        offset={-24}
         boxdirecion="right"
         component={
           <Toggle
