@@ -20,7 +20,7 @@ export function SearchAndResultsColumn({ onHandleAdd, setUserList }) {
   async function getData(q) {
     // Visar att datan laddar
     setIsLoading(true);
-    // setError("");
+    setError("");
     const url = "https://api.calorieninjas.com/v1/nutrition?query=" + q;
     try {
       const response = await fetch(url, {

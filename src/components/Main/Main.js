@@ -12,10 +12,9 @@ export default function Main({ bloodSugar, dailyInsulin, isBreakfastToggled }) {
   // tar objekt som ska tas bort som argument. anropar state-sättar funktionen för listan.
   // filtrerar listan och returnerar endast de objekt vars name inte är samma som det som skickades med som argument
   function handleDelete(item) {
-    console.log(item.name);
     setUserList((prev) => prev.filter((obj) => obj.name !== item.name));
   }
-  // lägger till en ny nutrient(maträtt/dryck)
+  // lägga till en ny nutrient(maträtt/dryck)
   function handleAdd(newNutrient) {
     // letar igenom arrayen för att se om objekte redan finns. Värdet som sparas i variabeln är indexet där dubbletten finns. Annars -1 om det inte finns.
     let existIndex = userList.findIndex(

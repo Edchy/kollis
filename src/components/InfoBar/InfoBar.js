@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Toggle from "../Toggle/Toggle";
 import "./infobar.css";
 import InfoCircle from "../InfoCircle/InfoCircle";
@@ -16,7 +15,7 @@ export default function InfoBar({
 
   switch (true) {
     case bloodSugar >= 4.2 && bloodSugar < 9:
-      BSColor = "var(--color-brand-secondary)";
+      BSColor = "#2cb67d";
       break;
     case bloodSugar >= 9 && bloodSugar < 12:
       BSColor = "yellow";

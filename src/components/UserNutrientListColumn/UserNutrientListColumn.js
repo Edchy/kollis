@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Button from "../Button/Button";
 import "./usernutrientlistcolumn.css";
+import { UserListItem } from "../UserListItem/UserListItem";
 
 // visar upp listan för valda objekt
 export function UserNutrientListColumn({
@@ -12,6 +13,49 @@ export function UserNutrientListColumn({
   isBreakfastToggled,
 }) {
   const [isScrolling, setIsScrolling] = useState(false);
+
+  ////////////////////
+  //TEST
+  // LONG COMMENT ALERT!
+  // Jag ville på något sätt öka UX genom att låta användaren få feedback på när man lägger till objet i listan eller när ett objekt som redan finns i listan uppdateras. En visuell markering som visar vad det är som händer när "lägga till knappen" klickas. Visste inte riktigt hur jag skulle göra detta och jag provade olika lösningar utan större framgång. Tillslut efter massa googlande, stack overflowande och dividerande med chatGPT hittade jag en lösning som fungerade. Jag kan inte säga att jag helt och hållet förstår lösningen, då den till större del, som sagt, är resultatet av copy/paste och att den introducerade, för mig, nya koncept som useRef-hooken och Set().
+  // Min tanke var att varje gång den här komponenten renderas (vilket den gör varje gång ett objekt uppdateras eller läggs till i userList) så ska den tidigare userList jämföras med den nya. Om något har ändrats så ska det elementet få ett klassnamn och en animation via klassnamnet.
+  const [changedItems, setChangedItems] = useState(new Set());
+  const prevUserList = usePrevious(userList);
+  function usePrevious(value) {
+    const ref = useRef();
+    useEffect(() => {
+      ref.current = value;
+    });
+    return ref.current;
+  }
+
+  useEffect(() => {
+    if (prevUserList) {
+      const newChangedItems = new Set();
+
+      userList.forEach((item) => {
+        const prevItem = prevUserList.find((prev) => prev.name === item.name);
+
+        // Compare based on a specific property or a simple condition
+        if (!prevItem || prevItem.serving_size_g !== item.serving_size_g) {
+          newChangedItems.add(item.name);
+        }
+      });
+
+      // Check if there's any change to update
+      if (newChangedItems.size > 0) {
+        setChangedItems(newChangedItems);
+      }
+    }
+
+    // Clear the set after some time
+    const timer = setTimeout(() => setChangedItems(new Set()), 300);
+
+    return () => clearTimeout(timer);
+  }, [userList, prevUserList]);
+  //TEST
+  ////////////////////////
+
   // räkna ut totalt antal kolhydrater genom att plussa ihop alla värden för varje objekts property för antal kolhydrater
   const totalCarbs = userList.reduce(
     (acc, curr) => acc + curr.carbohydrates_total_g,
@@ -39,10 +83,10 @@ export function UserNutrientListColumn({
       clearTimeout(timeout);
       timeout = setTimeout(() => setIsScrolling(false), 100);
     };
-    const ref = document.querySelector(".user-list-column");
-    ref.addEventListener("scroll", handleScroll);
+    const el = document.querySelector(".user-list-column");
+    el.addEventListener("scroll", handleScroll);
     return () => {
-      ref.removeEventListener("scroll", handleScroll);
+      el.removeEventListener("scroll", handleScroll);
       clearTimeout(timeout);
     };
   }, []);
@@ -53,27 +97,15 @@ export function UserNutrientListColumn({
         {/* "mappar ut" varje objekts olika properties till HTML-element */}
         {userList.length > 0 ? (
           userList.map((item) => (
-            <li className="user-list-item" key={item.name}>
-              <div>
-                <h4>
-                  {item.name} <span>{item.serving_size_g}g</span>
-                </h4>
-                <p className="item-carbs">
-                  {item.carbohydrates_total_g.toFixed(1)}
-                </p>
-              </div>
-              {/* varje objekt får en knapp, där funktionen för delete skickas in som prop. Funktionen tar objektet som parameter och filtrerar bort detta i handleDelete funktionen */}
-
-              <Button
-                className="delete-btn"
-                onClick={() => onHandleDelete(item)}
-              >
-                ❌
-              </Button>
-            </li>
+            <UserListItem
+              onHandleDelete={onHandleDelete}
+              item={item}
+              key={item.name}
+              className={changedItems.has(item.name) ? "highlight" : ""}
+            />
           ))
         ) : (
-          <p className="empty-text">empty</p>
+          <p className="empty-text">🍏</p>
         )}
       </ul>
       <div className="total-carbs-box">

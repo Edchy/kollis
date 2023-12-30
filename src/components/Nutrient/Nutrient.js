@@ -14,22 +14,12 @@ export function Nutrient({ searchResult, onHandleAdd }) {
     <li className="nutrient">
       <div className="nutrient-info">
         <h3 className="nutrient-title">{searchResult.name}</h3>
-
         <NumberInput title="Grams" grams={grams} setGrams={setGrams} />
-        {/* <input
-              id="grams"
-              type="number"
-              min="0"
-              max="4000"
-              step="10"
-              value={grams}
-              onChange={(e) => setGrams(Number(e.target.value))}
-            /> */}
         <p>
           Carbs: <span className="nutrient-total">{carbs.toFixed(1)}g</span>
         </p>
       </div>
-      {/* Här har det "prop-drillats" ordentligt. handleAdd har skickats ner genom många komponenter. Endast för att användas här (kan lösas bättre kanske?) i komponentens onClick prop. Funktionen tar ett nytt objekt som parameter och kopierar in alla properties från objektet som skickades in som prop till Item-komponenten. Men totala kolhydrater och serving-size propertiesen skrivs över med de nya användar-uppdaterade värdena */}
+      {/* Här har det "prop-drillats" ordentligt. handleAdd har skickats ner genom många komponenter. Endast för att användas här (kan lösas bättre kanske?) i komponentens onClick prop. Funktionen tar ett nytt objekt som parameter och kopierar in alla properties från objektet som skickades in som prop till komponenten. Men totala kolhydrater och serving-size propertiesen skrivs över med de nya, användar-uppdaterade värdena */}
       <Button
         className="add-btn"
         onClick={() =>

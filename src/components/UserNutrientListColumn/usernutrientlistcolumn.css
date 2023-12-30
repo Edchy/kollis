@@ -42,34 +42,6 @@
   }
 }
 
-.user-list-item {
-  font-size: var(--step--1);
-  text-transform: capitalize;
-
-  padding: 0.75rem 0.5rem;
-  display: flex;
-  justify-content: space-between;
-  /* border: 1px solid var(--color-light); */
-  @media (max-width: 768px) {
-    flex-basis: 49%;
-  }
-  @media (max-width: 468px) {
-    flex-basis: 100%;
-  }
-
-  & h3 span {
-    font-size: var(--step--2);
-  }
-  .item-carbs {
-    font-size: var(--step-0);
-    font-weight: bold;
-    color: var(--color-brand-secondary);
-  }
-  .delete-btn {
-    background-color: transparent;
-  }
-}
-
 .total-carbs-box {
   position: sticky;
   bottom: 0;
@@ -104,5 +76,18 @@
 
   & div:has(.reset-list-btn) {
     transition: all 0.5s;
+  }
+}
+
+.highlight {
+  animation: highlight 1s;
+}
+
+@keyframes highlight {
+  from {
+    background-color: yellow;
+  }
+  to {
+    background-color: transparent;
   }
 }
