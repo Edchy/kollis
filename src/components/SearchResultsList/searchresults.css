@@ -1,0 +1,11 @@
+.search-results {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 3rem;
+  /* padding-inline: 1rem; */
+
+  @media (max-width: 620px) {
+    grid-template-columns: 1fr;
+  }
+}

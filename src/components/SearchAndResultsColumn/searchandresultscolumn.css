@@ -1,0 +1,72 @@
+/* Component = SearchResultsList */
+.search-results-box {
+  padding-inline: clamp(0.5rem, 0.2159rem + 1.2121vw, 1.125rem);
+  background: linear-gradient(90deg, var(--color-dark-700) 17px, transparent 1%)
+      50%,
+    linear-gradient(var(--color-dark-700) 17px, transparent 1%) 50%,
+    var(--color-dark-500);
+  background-size: 18px 18px;
+  border-radius: var(--radius);
+  height: 80vh;
+  padding-bottom: 0.25rem;
+  /* Tar bort scrollbars, UI cleanare :) UX sämre :( */
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    height: 60vh;
+  }
+}
+.search-form {
+  padding-block: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* overflow: hidden; tar bort konstig sidescrolling som uppstod */
+  @media (max-width: 768px) {
+    padding-block-start: 2rem;
+    padding-block-end: 2rem;
+  }
+}
+
+.search {
+  border: none;
+  display: block;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  border-radius: var(--radius);
+  width: 90%;
+  max-width: 500px;
+  transition: box-shadow 0.2s, transform 0.2s;
+  color: var(--color-light);
+  background-color: var(--color-dark-500);
+}
+
+.search::placeholder {
+  color: var(--color-dark-300);
+}
+
+.form-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.form-buttons > * {
+  /* transform: translateY(-3px); */
+  transition: all 0.2s ease-in-out;
+}
+.search:focus {
+  outline: 1px solid var(--color-brand-primary);
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
+  transform: translateY(-6px);
+}
+
+.search:focus + .form-buttons > * {
+  transform: translateY(5px);
+  margin-inline: 0.5rem;
+}

@@ -1,0 +1,47 @@
+import { useState } from "react";
+import Button from "../Button/Button";
+import { NumberInput } from "../NumberInput/NumberInput";
+import "./nutrient.css";
+
+export function Nutrient({ searchResult, onHandleAdd }) {
+  // definierar state för att kunna via input låta användaren välja antal gram att lägga till.
+  // sätts initialt till objektets värde för serving-size (default 100g)
+  const [grams, setGrams] = useState(searchResult.serving_size_g);
+  // genom att använda state uppdateras den här variabeln dynamiskt när state för grams ändras.
+  let carbs =
+    searchResult.carbohydrates_total_g * (grams / searchResult.serving_size_g);
+  return (
+    <li className="nutrient">
+      <div className="nutrient-info">
+        <h3 className="nutrient-title">{searchResult.name}</h3>
+
+        <NumberInput title="Grams" grams={grams} setGrams={setGrams} />
+        {/* <input
+              id="grams"
+              type="number"
+              min="0"
+              max="4000"
+              step="10"
+              value={grams}
+              onChange={(e) => setGrams(Number(e.target.value))}
+            /> */}
+        <p>
+          Carbs: <span className="nutrient-total">{carbs.toFixed(1)}g</span>
+        </p>
+      </div>
+      {/* Här har det "prop-drillats" ordentligt. handleAdd har skickats ner genom många komponenter. Endast för att användas här (kan lösas bättre kanske?) i komponentens onClick prop. Funktionen tar ett nytt objekt som parameter och kopierar in alla properties från objektet som skickades in som prop till Item-komponenten. Men totala kolhydrater och serving-size propertiesen skrivs över med de nya användar-uppdaterade värdena */}
+      <Button
+        className="add-btn"
+        onClick={() =>
+          onHandleAdd({
+            ...searchResult,
+            serving_size_g: grams,
+            carbohydrates_total_g: carbs,
+          })
+        }
+      >
+        ➕
+      </Button>
+    </li>
+  );
+}
