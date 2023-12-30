@@ -1,4 +1,3 @@
-/* Component = SearchResultsList */
 .search-results-box {
   padding-inline: clamp(0.5rem, 0.2159rem + 1.2121vw, 1.125rem);
   background: linear-gradient(90deg, var(--color-dark-700) 17px, transparent 1%)
