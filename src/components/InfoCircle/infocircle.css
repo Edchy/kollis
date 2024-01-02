@@ -48,7 +48,7 @@
     font-size: var(--step--2);
   }
   & a {
-    color: var(--color-light);
+    color: var(--color-dark-700);
   }
   @media (max-width: 768px) {
     /* left: -3000px; overridden by inline style in component */

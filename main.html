@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+      .text {
+        /* position: absolute;
+        top: 50%;
+        left: 50%; */
+        /* transform: translate(-50%, -50%); */
+        border-right: 4px solid black;
+        /* font-size: 180%; */
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+      .animation {
+        animation: typewriter 4s steps(15) 1s infinite both,
+          blinkCursor 500ms steps(15) infinite;
+      }
+
+      @keyframes typewriter {
+        from {
+          width: 0;
+        }
+        to {
+          width: 214px;
+        }
+      }
+
+      @keyframes blinkCursor {
+        from {
+          border-right-color: black;
+        }
+        to {
+          border-right-color: transparent;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="flexbox.html">Flexbox</a></li>
+          <li><a href="grid.html">Grid</a></li>
+          <li><a href="specificity.html">Specificity</a></li>
+        </ul>
+      </nav>
+    </header>
+    <section class="container">
+      <h1>Cascading Style Sheets</h1>
+      <img src="img/cssselect.PNG" alt="" />
+      <img src="img/cssselect2.JPG" alt="" />
+      <p><br /></p>
+      <p>Kevin Powells 6 starting tips:</p>
+      <ol>
+        <li>analyze the design before you start</li>
+        <li>
+          separate content from layout in css. Make classes for the layout
+          structure and classes for content structure(how things look)
+        </li>
+        <li>go back to the fundamentals and really understand them</li>
+        <li>stop trying to design things. use existing designs instead.</li>
+        <li>pixel perfection is a lie</li>
+        <li>JS - learn DOM manipulation first</li>
+      </ol>
+      <p><br /></p>
+      <ul>
+        <li><strong>What is the Web?</strong></li>
+      </ul>
+      <p>The Web is a subset of the internet.</p>
+      <p>
+        Like every other computer network out there, the Web is made up of two
+        main components: the web browser client and the web server.
+      </p>
+      <p>
+        The client requests the data and the server
+        <strong>shares&nbsp;</strong>or <strong>serves&nbsp;</strong>its data.
+        To achieve this, the two parties have to establish an agreement. That
+        agreement is called the
+        <strong>Application Programming Interface&nbsp;</strong>or in short, the
+        <strong>API.</strong>
+      </p>
+      <p>
+        But this data has to be arranged and formatted into a form that&apos;s
+        understandable by end-users who have a wide range of technical
+        experiences and abilities.
+      </p>
+      <p>
+        This is where HTML, CSS, JavaScript and the whole concept of web
+        development come into play.
+      </p>
+
+      <h3>Styling Links with pseudo classes:</h3>
+
+      <p>a {} :link :visited :hover :focus :active</p>
+
+      <p>
+        &lt;a&gt; The recommended order is link,visited,focus,hover,active.
+        &lt;/a&gt; t&auml;nk Love Hate. LVHA. link visited hover active.
+      </p>
+
+      <h3>Pseudo-classes:</h3>
+      <p>:first-of-type</p>
+      <p>:first-child</p>
+      <p>:only-child</p>
+      <p>:nth-child(2n+3)</p>
+
+      <h3>Pseudo-element:</h3>
+      <p>p::first-line</p>
+      <p>p::first-letter</p>
+      <p>::before</p>
+      <p>::after</p>
+
+      <h3>Attribute selectors</h3>
+      <p>
+        a[href] {} or a[href=&ldquo;some url&rdquo;] {} = attribute selector
+      </p>
+
+      <p>
+        a[href^=&ldquo;http://&ldquo;] = alla a href som b&ouml;rjar med http://
+        ( ^ )
+      </p>
+      <p>a[href$=&ldquo;pdf&rdquo;] = alla a href som slutar med pdf ( $ )</p>
+      <p>
+        a[href~=&ldquo;blabla&rdquo;] = alla href som n&aring;gonstans
+        inneh&aring;ller blabla ordagrant ( ~)
+      </p>
+      <p>
+        a[href*=&ldquo;blabla&rdquo;] = alla href som n&aring;gonstans
+        inneh&aring;ller blabla bokstavf&ouml;rbokstav( * )
+      </p>
+
+      <p>
+        skillnaden p&aring; ~ och * &auml;r att ~matchar bara p&aring; blabla
+        och * matchar p&aring; blablazz
+      </p>
+
+      <h3>Learn about <a href="specificity.html">CSS Specificty</a></h3>
+
+      <h3>List of attributes:</h3>
+      <ul>
+        <li>word-break:</li>
+        <li>hyphens:</li>
+        <li>overflow-wrap:</li>
+        <li>scroll-behavior: smooth;</li>
+        <li>li::marker - change list bullet</li>
+        <li>::cue - style subtitles/captions</li>
+        <li>input{caret-color: red}</li>
+        <li class="text animation">Typewriter effect</li>
+        <li>::selection - cuztomise text selection</li>
+        <li>cursor: url(path) - customize cursor</li>
+        <li>:first-letter - customize first letters</li>
+        <li>
+          li:not(:last-child)::after {content: ","} - comma separated list
+        </li>
+        <li>text-stroke: - text outlines</li>
+        <li>list-style-type: "\27A1" - custom emoji list</li>
+        <li>perspective: - gives 3D look</li>
+        <li>over-flow: auto; - make a div scrollable</li>
+        <li>
+          Scroll behaviours: scroll-behavior: smooth; scroll-snap-type:;
+          scroll-snap-align:;
+        </li>
+      </ul>
+    </section>
+  </body>
+</html>

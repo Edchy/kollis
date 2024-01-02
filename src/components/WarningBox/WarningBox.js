@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import "./warningbox.css";
 import Button from "../Button/Button";
+import "./warningbox.css";
 
 // komponent som renderar en varning om användaren knappar in ett lågt eller högt värde.
 export default function WarningBox({ bloodSugar }) {
@@ -9,10 +9,21 @@ export default function WarningBox({ bloodSugar }) {
     Boolean(bloodSugar && (bloodSugar > 12 || bloodSugar < 4.2))
   );
 
-  // uppdatera isActive om värdet bloodSugar ändras
+  // uppdatera isActive om värdet bloodSugar ändras. Dependency = bloodSugar.
   useEffect(() => {
     setIsActive(bloodSugar && (bloodSugar > 12 || bloodSugar < 4.2));
   }, [bloodSugar]);
+
+  // Låt användare trycka bort varningen med esc eller enter
+  useEffect(() => {
+    function cb(e) {
+      if (e.code === "Escape" || e.code === "Enter") {
+        setIsActive(false);
+      }
+    }
+    document.addEventListener("keydown", cb);
+    return () => document.removeEventListener("keydown", cb);
+  }, []);
 
   // om isActive = True ges klassen "active" vilket triggar en css-animation som gör att "boxen" visas i UI.
   // beroende på vilket värde bloodSugar är renderas olika varningstexter

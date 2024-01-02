@@ -43,5 +43,8 @@ FIXA ERROR MEDDELANDET!
 
 ändra Nutrient namn till SearchResultNutrient
 
+hover på userlist. klick på en nutrient tar till ny route där full info om nutrienten fetchas
+
+skillnad på kokt och okokt. belys detta.
 
 banana fanta rice coke chocolate crisps sprite pasta coffee beef pork kiwi milkshake popcorn asparagus turkey sandwich yoghurt
