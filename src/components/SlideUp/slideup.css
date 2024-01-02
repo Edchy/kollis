@@ -30,8 +30,8 @@
   }
 }
 .speech-bubble {
-  border: 1px solid white;
-  background-color: white;
+  border: 1px solid var(--color-light);
+  background-color: var(--color-light);
   color: black;
   position: absolute;
   border-radius: var(--radius);
@@ -46,7 +46,7 @@
   z-index: 2;
 
   .btn {
-    color: white;
+    color: var(--color-light);
     font-size: 1.75rem;
     background-color: transparent;
     /* border: 1px solid gray; */
@@ -58,7 +58,7 @@
   .bubble-tip {
     height: 20px;
     aspect-ratio: 1;
-    background-color: white;
+    background-color: var(--color-light);
     position: absolute;
     bottom: -10px;
     transform: rotate(45deg);

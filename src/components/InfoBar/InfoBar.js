@@ -36,6 +36,7 @@ export default function InfoBar({
         direction="right"
         offset={-24}
         boxdirecion="left"
+        emoji="🩸"
         component={
           <label>
             BS:{" "}
@@ -67,6 +68,7 @@ export default function InfoBar({
         direction="right"
         offset={-24}
         boxdirecion="left"
+        emoji="☀️"
         component={
           <label>
             Daily Insulin:{" "}
@@ -84,6 +86,7 @@ export default function InfoBar({
         direction="right"
         offset={-24}
         boxdirecion="right"
+        emoji="☕️"
         component={
           <Toggle
             isBreakfastToggled={isBreakfastToggled}

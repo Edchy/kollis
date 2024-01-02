@@ -7,6 +7,7 @@ export default function InfoCircle({
   direction = "right",
   offset,
   boxdirecion = "left",
+  emoji = "👻",
 }) {
   return (
     <div className="info">
@@ -15,7 +16,7 @@ export default function InfoCircle({
         style={{ [direction]: offset ? `${offset}px` : "0px" }}
         className="info-circle"
       >
-        👻
+        {emoji}
         <div style={{ [boxdirecion]: "100%" }} className="infotext-box">
           <h4>
             Boo! What's this? <span className="emoji">👻</span>
