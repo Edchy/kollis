@@ -15,7 +15,7 @@ export default function WarningBox({ bloodSugar }) {
   }, [bloodSugar]);
 
   // om isActive = True ges klassen "active" vilket triggar en css-animation som gör att "boxen" visas i UI.
-  // beroende på vilket värde bloodSugar är renderas olika
+  // beroende på vilket värde bloodSugar är renderas olika varningstexter
   return (
     <div className={`warning ${isActive ? "active" : ""}`}>
       {bloodSugar >= 20 && (
@@ -38,7 +38,7 @@ export default function WarningBox({ bloodSugar }) {
           eat and/or drink something sweet. DO NOT take insulin right now!
         </p>
       )}
-      <Button onClick={() => setIsActive(false)}>Ok</Button>
+      <Button onClick={() => setIsActive(false)}>I Understand</Button>
     </div>
   );
 }

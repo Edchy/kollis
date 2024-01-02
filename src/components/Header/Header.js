@@ -15,9 +15,9 @@ export default function Header() {
           </div>
         </div>
         <ul className="main-nav__list">
-          <li>link</li>
-          <li>link</li>
-          <li>link</li>
+          <li>How to use</li>
+          <li>Tips</li>
+          <li>Ketones</li>
         </ul>
       </nav>
     </header>

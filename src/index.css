@@ -1,10 +1,10 @@
 @import url("https://api.fontshare.com/v2/css?f[]=sharpie@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,700;1,400&display=swap");
 
 :root {
   --color-dark-700: #16161a;
   --color-dark-500: #333337;
   --color-dark-300: #666a70;
-  /* --color-light: #fffffe; */
   --color-light: #fefefa;
   --color-brand-primary: #7f5af0;
   --color-brand-secondary: #2cb67d;
@@ -12,9 +12,11 @@
   --color-donut: #feab67;
   --color-warning: rgb(244, 45, 45);
   --radius: 0.5rem;
-}
-/* @link https://utopia.fyi/type/calculator?c=375,16,1.25,1200,18,1.333,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l|3xs-xs&g=s,l,xl,12 */
-:root {
+  --font-brand: "Sharpie", sans-serif;
+  --font-primary: "Figtree", sans-serif;
+  /* --font-secondary: "Plus Jakarta Sans", sans-serif; */
+
+  /* Fluid font sizing - https://utopia.fyi/type/calculator?c=375,16,1.25,1200,18,1.333,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l|3xs-xs&g=s,l,xl,12 */
   --step--3: clamp(0.5763rem, 0.5799rem + -0.0048vw, 0.5788rem);
   --step--2: clamp(0.6944rem, 0.6827rem + 0.0497vw, 0.72rem);
   --step--1: clamp(0.8331rem, 0.8027rem + 0.1297vw, 0.9rem);
@@ -30,7 +32,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: sans-serif;
 }
 
 #root {
@@ -48,6 +49,13 @@
 
 body {
   background-color: var(--color-light);
+  font-family: var(--font-primary);
+  /* line-height: 1.5; */
+}
+
+input,
+button {
+  font-family: inherit;
 }
 
 ul {

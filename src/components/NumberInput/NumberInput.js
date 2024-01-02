@@ -1,6 +1,9 @@
 import Button from "../Button/Button";
 
-export function NumberInput({ grams, setGrams, title }) {
+// Denna komponent returnerar en input med en knapp på vardera sida.
+// Knapp-komponenterna ändrar state med +/- 10. Detta state är det som input har som value,
+
+export default function NumberInput({ grams, setGrams, title }) {
   return (
     <div className="number-input">
       <label htmlFor={title}>{title}:</label>
@@ -13,11 +16,8 @@ export function NumberInput({ grams, setGrams, title }) {
       {/* Controlled element */}
       <input
         id={title}
-        // min="0"
-        // max="4000"
-        // step="10"
         value={grams}
-        // Value castas om till nummer
+        // Value castas om till nummer då jag inte använder type="number" här.
         onChange={(e) => setGrams(Number(e.target.value))}
       />
       <Button

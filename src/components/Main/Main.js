@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { UserNutrientListColumn } from "../UserNutrientListColumn/UserNutrientListColumn";
+import UserNutrientListColumn from "../UserNutrientListColumn/UserNutrientListColumn";
+import SearchAndResultsColumn from "../SearchAndResultsColumn/SearchAndResultsColumn";
+// import swoosh from "../../swoosh.mp3";
 import "./main.css";
-import swoosh from "../../swoosh.mp3";
-import { SearchAndResultsColumn } from "../SearchAndResultsColumn/SearchAndResultsColumn";
 // import SlideUp from "./SlideUp/SlideUp";
 
 export default function Main({ bloodSugar, dailyInsulin, isBreakfastToggled }) {
@@ -16,7 +16,7 @@ export default function Main({ bloodSugar, dailyInsulin, isBreakfastToggled }) {
   }
   // lägga till en ny nutrient(maträtt/dryck)
   function handleAdd(newNutrient) {
-    // letar igenom arrayen för att se om objekte redan finns. Värdet som sparas i variabeln är indexet där dubbletten finns. Annars -1 om det inte finns.
+    // letar igenom arrayen för att se om objektet redan finns. Värdet som sparas i variabeln är indexet där dubbletten finns. Annars -1 om det inte finns.
     let existIndex = userList.findIndex(
       (existingObj) => existingObj.name === newNutrient.name
     );
@@ -24,10 +24,10 @@ export default function Main({ bloodSugar, dailyInsulin, isBreakfastToggled }) {
     // om objektet inte redan finns -> setUserList tar den "gamla" listan och "spreadar" in den tillsammans med den nya objektet
     if (existIndex === -1) {
       setUserList((prev) => [...prev, newNutrient]);
-      new Audio(swoosh).play();
+      // new Audio(swoosh).play();
     }
     // Annars > uppdatera objektets properties för totala kolhydrater samt serving-size.
-    // detta genom att återigen sätta state för arrayen, genom att mappa igenom den och där indexet är samma som variabeln existIndex returnera samma properties (...obj(endast name i detta fall)), men uppdatera totala kolhydrater samt serving-size genom att plussa på de nya med de gamla. om index !== existIndex returneras bara objektet.
+    // detta genom att återigen sätta state för arrayen, genom att mappa igenom föregående state och där indexet är samma som variabeln existIndex returnera samma properties (...obj(endast name i detta fall)), men uppdatera totala kolhydrater samt serving-size genom att plussa på de nya med de gamla. om index !== existIndex returneras bara objektet.
     else {
       setUserList((prev) =>
         prev.map((obj, index) =>

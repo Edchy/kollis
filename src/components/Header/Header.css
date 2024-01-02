@@ -5,6 +5,7 @@
   align-items: center;
   border-radius: var(--radius);
   background-color: var(--color-light);
+  padding-inline: clamp(0.3125rem, 0.0284rem + 1.2121vw, 0.9375rem);
 
   color: black;
 }
@@ -36,7 +37,7 @@
   span {
     font-size: var(--step-4);
     line-height: 0.75;
-    font-family: "Sharpie", sans-serif;
+    font-family: var(--font-brand);
     text-transform: uppercase;
     /* letter-spacing: 1px; */
   }

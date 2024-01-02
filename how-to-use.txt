@@ -39,9 +39,9 @@ Tänk också på följande
 Om ett barn som fått sin uträknade dos insulin inte äter upp den måltid som man beräknat dosen på är det viktigt att man kompenserar de missade kolhydraterna med smörgås eller frukt (motsvarande mängd kolhydrater som ej ätits) för att undvika för lågt blodsocker.
 Om beräkningen av insulindos resulterar i en siffra med decimaler så skall du avrunda till närmaste halva enhet.
 
+FIXA ERROR MEDDELANDET!
 
-
-
+ändra Nutrient namn till SearchResultNutrient
 
 
 banana fanta rice coke chocolate crisps sprite pasta coffee beef pork kiwi milkshake popcorn asparagus turkey sandwich yoghurt

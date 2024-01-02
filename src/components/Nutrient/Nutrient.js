@@ -1,9 +1,11 @@
 import { useState } from "react";
 import Button from "../Button/Button";
-import { NumberInput } from "../NumberInput/NumberInput";
+import NumberInput from "../NumberInput/NumberInput";
 import "./nutrient.css";
 
-export function Nutrient({ searchResult, onHandleAdd }) {
+// Komponent som returnerar en <li> med info om varje sökresultat.
+
+export default function Nutrient({ searchResult, onHandleAdd }) {
   // definierar state för att kunna via input låta användaren välja antal gram att lägga till.
   // sätts initialt till objektets värde för serving-size (default 100g)
   const [grams, setGrams] = useState(searchResult.serving_size_g);
@@ -14,6 +16,7 @@ export function Nutrient({ searchResult, onHandleAdd }) {
     <li className="nutrient">
       <div className="nutrient-info">
         <h3 className="nutrient-title">{searchResult.name}</h3>
+        {/* Komponent som tillåter reglering av hur många gram av en nutrient man vill lägga till. */}
         <NumberInput title="Grams" grams={grams} setGrams={setGrams} />
         <p>
           Carbs: <span className="nutrient-total">{carbs.toFixed(1)}g</span>

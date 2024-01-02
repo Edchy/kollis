@@ -11,8 +11,8 @@ export default function InfoBar({
   setIsBreakfastToggled,
   isBreakfastToggled,
 }) {
+  // variabeln BSColors värde baseras på bloodSugars värde (högt=rött, bra=grönt etc). variabeln sätts som värde för inputs color property.
   let BSColor;
-
   switch (true) {
     case bloodSugar >= 4.2 && bloodSugar < 9:
       BSColor = "#2cb67d";
@@ -29,7 +29,9 @@ export default function InfoBar({
 
   return (
     <aside>
+      {/* WarningBox visas bara om höga eller låga BS-värden har matats in. Logiken för detta finns i komponenten */}
       <WarningBox bloodSugar={bloodSugar} />
+      {/* InfoCircle tar en komponent som prop och visar upp en liten symbol efter denna. Vid hover visas children. */}
       <InfoCircle
         direction="right"
         offset={-24}
@@ -40,8 +42,10 @@ export default function InfoBar({
             <input
               style={{
                 color: BSColor,
+                // om input = tomt, färg vit, annars färg baserat på bloodsugar
                 caretColor: bloodSugar ? BSColor : "var(--color-light)",
               }}
+              // standard kontrollerat element där varje ändring ändrar state och value är satt till samma state.
               onChange={(e) => setBloodSugar(e.target.value)}
               value={bloodSugar}
             />
@@ -89,9 +93,6 @@ export default function InfoBar({
       >
         <p>ss</p>
       </InfoCircle>
-
-      {/* <div>Your current BS: {bloodSugar}</div>
-      <div>Your daily insulin: {dailyInsulin}</div> */}
     </aside>
   );
 }
