@@ -5,7 +5,7 @@ import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import "./searchandresultscolumn.css";
 
-export default function SearchAndResultsColumn({ onHandleAdd, setUserList }) {
+export default function SearchAndResultsColumn({ onAdd, setUserList }) {
   const [searchResults, setSearchResults] = useState([]);
   const [fetchError, setFetchError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -71,8 +71,8 @@ export default function SearchAndResultsColumn({ onHandleAdd, setUserList }) {
   return (
     <section className="search-results-box">
       <SearchForm
-        onHandleSubmit={handleSubmit}
-        onHandleQuickAdd={handleQuickAdd}
+        onSubmit={handleSubmit}
+        onQuickAdd={handleQuickAdd}
         setQuery={setQuery}
         query={query}
       />
@@ -82,7 +82,7 @@ export default function SearchAndResultsColumn({ onHandleAdd, setUserList }) {
       {fetchError && <ErrorMessage>Sorry! {fetchError}</ErrorMessage>}
       {!isLoading && !fetchError && (
         <SearchResultsList
-          onHandleAdd={onHandleAdd}
+          onAdd={onAdd}
           searchResults={searchResults}
           searched={searched}
         />

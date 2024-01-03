@@ -5,7 +5,7 @@ import "./nutrient.css";
 
 // Komponent som returnerar en <li> med info om varje sökresultat.
 
-export default function Nutrient({ searchResult, onHandleAdd }) {
+export default function Nutrient({ searchResult, onAdd }) {
   // definierar state för att kunna via input låta användaren välja antal gram att lägga till.
   // sätts initialt till objektets värde för serving-size (default 100g)
   const [grams, setGrams] = useState(searchResult.serving_size_g);
@@ -26,7 +26,7 @@ export default function Nutrient({ searchResult, onHandleAdd }) {
       <Button
         className="add-btn"
         onClick={() =>
-          onHandleAdd({
+          onAdd({
             ...searchResult,
             serving_size_g: grams,
             carbohydrates_total_g: carbs,

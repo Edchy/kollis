@@ -2,14 +2,9 @@ import Button from "../Button/Button";
 import InfoCircle from "../InfoCircle/InfoCircle";
 import "./searchform.css";
 
-export default function SearchForm({
-  onHandleQuickAdd,
-  onHandleSubmit,
-  query,
-  setQuery,
-}) {
+export default function SearchForm({ onQuickAdd, onSubmit, query, setQuery }) {
   return (
-    <form className="search-form" onSubmit={onHandleSubmit}>
+    <form className="search-form" onSubmit={onSubmit}>
       {/* Controlled Element */}
       {/* Value sätts till query-variabeln som är state. När input ändras anropas setQuery med eventets targets värde (input) och rerendrar och det nya värdet reflekteras i input-rutan eftersom dess value är bundet till state-variabeln "query"*/}
       <input
@@ -31,7 +26,7 @@ export default function SearchForm({
           component={
             <Button
               className="quickadd-btn secondary-btn"
-              onClick={onHandleQuickAdd}
+              onClick={onQuickAdd}
               type="button"
             >
               Quick Add

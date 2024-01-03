@@ -2,11 +2,7 @@ import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import Nutrient from "../Nutrient/Nutrient";
 import "./searchresults.css";
 
-export default function SearchResultsList({
-  searchResults,
-  onHandleAdd,
-  searched,
-}) {
+export default function SearchResultsList({ searchResults, onAdd, searched }) {
   return (
     <ul className="search-results">
       {/* Om arrayen innehåller något skrivs det annars skrivs meddelande att sök inte gav träff */}
@@ -14,11 +10,7 @@ export default function SearchResultsList({
       {/* varje sökresultat (objekt) mappas till en instans av Nutrient-komponenten och skickar med objektet som prop */}
       {searchResults.length > 0 || !searched ? (
         searchResults.map((result) => (
-          <Nutrient
-            onHandleAdd={onHandleAdd}
-            key={result.name}
-            searchResult={result}
-          />
+          <Nutrient onAdd={onAdd} key={result.name} searchResult={result} />
         ))
       ) : (
         <ErrorMessage>

@@ -1,4 +1,8 @@
 import { useState } from "react";
+import { FaHamburger } from "react-icons/fa";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { AiOutlineClose } from "react-icons/ai";
+
 import Button from "../Button/Button";
 import "./Header.css";
 
@@ -25,17 +29,26 @@ export default function Header() {
           <li>Diabetes 101</li>
           <li>Ketones</li>
         </ul>
-        <Button className="toggle-menu-btn" onClick={toggleOpen}>
-          X
-        </Button>
-        <div className={`drop-down-menu ${isOpen ? "open" : ""}`}>
-          <ul>
-            <li>How to use</li>
-            <li>Diabetes 101</li>
-            <li>Ketones</li>
-          </ul>
-        </div>
+        <DropDownMenu isOpen={isOpen} toggleOpen={toggleOpen} />
       </nav>
     </header>
+  );
+}
+
+function DropDownMenu({ isOpen, toggleOpen }) {
+  return (
+    <>
+      {" "}
+      <Button className="toggle-menu-btn" onClick={toggleOpen}>
+        {isOpen ? <AiOutlineClose /> : <FaHamburger />}
+      </Button>
+      <div className={`drop-down-menu ${isOpen ? "open" : ""}`}>
+        <ul>
+          <li>How to use</li>
+          <li>Diabetes 101</li>
+          <li>Ketones</li>
+        </ul>
+      </div>
+    </>
   );
 }

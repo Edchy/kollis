@@ -1,5 +1,5 @@
 .main-header {
-  color: var(--color-light);
+  /* color: var(--color-light); */
   grid-area: head;
   display: flex;
   align-items: center;
@@ -7,7 +7,7 @@
   background-color: var(--color-light);
   padding-inline: clamp(0.3125rem, 0.0284rem + 1.2121vw, 0.9375rem);
 
-  color: var(--colord-dark-700);
+  color: var(--color-dark-700);
 }
 
 .main-logo {
@@ -21,20 +21,17 @@
     line-height: 0.75;
     font-family: var(--font-brand);
     text-transform: uppercase;
-    /* letter-spacing: 1px; */
   }
   & span {
     color: var(--color-brand-primary);
   }
   & p {
     font-size: var(--step--2);
-    padding-left: 4px;
-    /* text-transform: uppercase; */
-    letter-spacing: 0.5px;
+    /* padding-left: 4px; */
 
     @media (max-width: 768px) {
       text-align: center;
-      padding-left: 0;
+      /* padding-left: 0; */
       display: none;
     }
   }
@@ -52,14 +49,14 @@
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  text-transform: uppercase;
-  font-weight: bold;
 
   .nav-list {
     display: flex;
     list-style: none;
     color: var(--color-dark-500);
     font-size: var(--step--1);
+    font-weight: bold;
+    /* text-transform: uppercase; */
 
     & > li:not(:last-child) {
       margin-right: 4rem;
@@ -72,6 +69,8 @@
 
 .toggle-menu-btn {
   display: none;
+  font-size: var(--step-3);
+  background-color: transparent;
 
   @media (max-width: 768px) {
     display: block;

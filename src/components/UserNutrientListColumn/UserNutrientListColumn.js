@@ -7,7 +7,7 @@ import "./usernutrientlistcolumn.css";
 export default function UserNutrientListColumn({
   userList,
   setUserList,
-  onHandleDelete,
+  onDelete,
   dailyInsulin,
   bloodSugar,
   isBreakfastToggled,
@@ -33,7 +33,7 @@ export default function UserNutrientListColumn({
 
   return (
     <section className="user-list-column">
-      <UserList userList={userList} onHandleDelete={onHandleDelete} />
+      <UserList userList={userList} onDelete={onDelete} />
       <UserTotalBox
         bloodSugar={bloodSugar}
         userList={userList}

@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import UserListItem from "../UserListItem/UserListItem";
 import "./userlist.css";
 
-export default function UserList({ userList, onHandleDelete }) {
+export default function UserList({ userList, onDelete }) {
   // LONG COMMENT ALERT!
   // Jag ville på något sätt öka UX genom att låta användaren få feedback på när man lägger till objet i listan eller när ett objekt som redan finns i listan uppdateras. En visuell markering som visar vad det är som händer när "lägga till knappen" klickas. Visste inte riktigt hur jag skulle göra detta och jag provade olika lösningar utan större framgång. Tillslut efter massa googlande, stack overflowande och dividerande med chatGPT hittade jag en lösning som fungerade. Jag kan inte säga att jag helt och hållet förstår lösningen, då den introducerade, för mig, nya koncept som useRef-hooken och Set().
   // Min tanke var att varje gång den här komponenten renderas (vilket den gör varje gång ett objekt uppdateras eller läggs till i userList) så ska den tidigare userList jämföras med den nya. Om något har ändrats så ska det elementet få ett klassnamn och en animation via klassnamnet.
@@ -41,7 +41,7 @@ export default function UserList({ userList, onHandleDelete }) {
       {userList.length > 0 ? (
         userList.map((item) => (
           <UserListItem
-            onHandleDelete={onHandleDelete}
+            onDelete={onDelete}
             item={item}
             key={item.name}
             // Kolla om item.name finns i changedItems, isf ge klass.

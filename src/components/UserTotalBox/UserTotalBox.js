@@ -46,10 +46,12 @@ export default function UserTotalBox({
           </Button>
         </div>
       )}
+
       <p>total</p>
       <h2>{totalCarbs.toFixed(1)}g</h2>
-      {/*visas endast om användaren matat in värde i daily insulin */}
-      {dailyInsulin && <h3>{insulinDose.toFixed(1)}U</h3>}
+
+      {/*komponenten visas om båda är true*/}
+      {dailyInsulin && insulinDose > 0.1 && <h3>{insulinDose.toFixed(1)}U</h3>}
     </div>
   );
 }

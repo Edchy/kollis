@@ -23,5 +23,10 @@
   }
   .delete-btn {
     background-color: transparent;
+    color: var(--color-dark-300);
+    font-size: 1rem;
+    &:hover {
+      color: var(--color-light);
+    }
   }
 }

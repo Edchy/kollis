@@ -1,8 +1,10 @@
 import Button from "../Button/Button";
+import { IoTrashBinSharp } from "react-icons/io5";
+
 import "./userlistitem.css";
 
 // Rendera en <li> för varje objekt som användaren lägger till
-export default function UserListItem({ item, onHandleDelete, className }) {
+export default function UserListItem({ item, onDelete, className }) {
   return (
     // tar class som prop för att dynamiskt kunna lägga till class
     <li className={`user-list-item ${className}`}>
@@ -13,8 +15,8 @@ export default function UserListItem({ item, onHandleDelete, className }) {
         <p className={`item-carbs`}>{item.carbohydrates_total_g.toFixed(1)}</p>
       </div>
       {/* varje objekt får en knapp, där funktionen för delete skickas in som prop. Funktionen tar objektet som parameter och filtrerar bort detta i handleDelete funktionen */}
-      <Button className="delete-btn" onClick={() => onHandleDelete(item)}>
-        ❌
+      <Button className="delete-btn" onClick={() => onDelete(item)}>
+        <IoTrashBinSharp />
       </Button>
     </li>
   );

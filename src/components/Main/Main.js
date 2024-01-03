@@ -46,12 +46,9 @@ export default function Main({ bloodSugar, dailyInsulin, isBreakfastToggled }) {
   return (
     <main className="main">
       {" "}
-      <SearchAndResultsColumn
-        onHandleAdd={handleAdd}
-        setUserList={setUserList}
-      />
+      <SearchAndResultsColumn onAdd={handleAdd} setUserList={setUserList} />
       <UserNutrientListColumn
-        onHandleDelete={handleDelete}
+        onDelete={handleDelete}
         userList={userList}
         setUserList={setUserList}
         bloodSugar={bloodSugar}
