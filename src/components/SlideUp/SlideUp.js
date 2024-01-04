@@ -4,7 +4,6 @@ import "./slideup.css";
 
 export default function SlideUp() {
   const [isShowing, setIsShowing] = useState(false); // reglerar komponentens visibilitet
-
   const [speechBubbleText, setSpeechBubbleText] = useState(0); // reglerar vilken text som visas
 
   // setTimeout är en side-effect och därför används useEffect hooken.
@@ -22,6 +21,7 @@ export default function SlideUp() {
   useEffect(() => {
     function handleEscape(e) {
       if (e.code === "Escape") {
+        // om "Esc", ändra state.
         setIsShowing(false);
       }
     }
@@ -41,7 +41,6 @@ export default function SlideUp() {
     function handleClick() {
       setSpeechBubbleText((prev) => prev + 1);
       if (speechBubbleText === 3) setIsShowing(false);
-      console.log(speechBubbleText);
     }
     if (isShowing) {
       document.addEventListener("click", handleClick);
@@ -79,6 +78,7 @@ export default function SlideUp() {
         here
       </a>
     </p>,
+    <p>boo</p>,
   ];
 
   return (

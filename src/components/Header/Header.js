@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { FaHamburger } from "react-icons/fa";
-import { RxHamburgerMenu } from "react-icons/rx";
-import { AiOutlineClose } from "react-icons/ai";
-
-import Button from "../Button/Button";
+import DropDownMenu from "../DropDownMenu/DropDownMenu";
+import SettingsPanel from "../SettingsPanel/SettingsPanel";
 import "./Header.css";
 
-export default function Header() {
+const navLinks = ["How to use", "Diabetes 101", "Ketones"];
+
+export default function Header({ setIdealBs, idealBs }) {
   const [isOpen, setIsOpen] = useState(false);
   function toggleOpen() {
     setIsOpen(!isOpen);
@@ -25,30 +24,19 @@ export default function Header() {
           </div>
         </div>
         <ul className="nav-list">
-          <li>How to use</li>
-          <li>Diabetes 101</li>
-          <li>Ketones</li>
+          <li>{navLinks[0]}</li>
+          <li>{navLinks[1]}</li>
+          <li>{navLinks[2]}</li>
         </ul>
-        <DropDownMenu isOpen={isOpen} toggleOpen={toggleOpen} />
+        <div className="flex-group">
+          <DropDownMenu
+            navLinks={navLinks}
+            isOpen={isOpen}
+            toggleOpen={toggleOpen}
+          />
+          <SettingsPanel setIdealBs={setIdealBs} idealBs={idealBs} />
+        </div>
       </nav>
     </header>
-  );
-}
-
-function DropDownMenu({ isOpen, toggleOpen }) {
-  return (
-    <>
-      {" "}
-      <Button className="toggle-menu-btn" onClick={toggleOpen}>
-        {isOpen ? <AiOutlineClose /> : <FaHamburger />}
-      </Button>
-      <div className={`drop-down-menu ${isOpen ? "open" : ""}`}>
-        <ul>
-          <li>How to use</li>
-          <li>Diabetes 101</li>
-          <li>Ketones</li>
-        </ul>
-      </div>
-    </>
   );
 }

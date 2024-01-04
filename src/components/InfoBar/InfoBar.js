@@ -1,7 +1,8 @@
+import { IoSettingsOutline } from "react-icons/io5";
 import Toggle from "../Toggle/Toggle";
-import "./infobar.css";
 import InfoCircle from "../InfoCircle/InfoCircle";
 import WarningBox from "../WarningBox/WarningBox";
+import "./infobar.css";
 
 export default function InfoBar({
   setBloodSugar,
@@ -10,6 +11,7 @@ export default function InfoBar({
   bloodSugar,
   setIsBreakfastToggled,
   isBreakfastToggled,
+  idealBs,
 }) {
   // variabeln BSColors värde baseras på bloodSugars värde (högt=rött, bra=grönt etc). variabeln sätts som värde för inputs color property.
   let BSColor;
@@ -47,7 +49,7 @@ export default function InfoBar({
                 caretColor: bloodSugar ? BSColor : "var(--color-light)",
               }}
               // standard kontrollerat element där varje ändring ändrar state och value är satt till samma state.
-              onChange={(e) => setBloodSugar(e.target.value)}
+              onChange={(e) => setBloodSugar(Number(e.target.value))}
               value={bloodSugar}
             />
           </label>
@@ -56,7 +58,11 @@ export default function InfoBar({
         <p>
           By entering your current bloodsugar (BS) here. Carboo will let you
           know how much extra insuling is needed to get you down to your ideal
-          BS (which is 6 by default).
+          BS <strong>{idealBs}</strong> (you can change this in{" "}
+          <em>
+            the settings <IoSettingsOutline /> in the top right corner.
+          </em>
+          )
           <br />
           <br />
           This is calculated by dividing your daily insulin by 100 according to
@@ -74,7 +80,7 @@ export default function InfoBar({
             Daily Insulin:{" "}
             <input
               value={dailyInsulin}
-              onChange={(e) => setDailyInsulin(e.target.value)}
+              onChange={(e) => setDailyInsulin(Number(e.target.value))}
             />
           </label>
         }

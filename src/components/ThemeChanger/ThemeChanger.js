@@ -38,7 +38,7 @@ const themes = {
 export default function ThemeChanger() {
   // sätter state till att hämta värdet för "theme" i localstorage när komponenten mountar (så att valet av tema "stannar kvar" vid reload/återbesök)
   const [theme, setTheme] = useState(() => {
-    return localStorage.getItem("theme");
+    return localStorage.getItem("theme") || "carboo";
   });
   // när theme ändras (dependency), spara i localstorage.
   useEffect(() => {
@@ -63,7 +63,7 @@ export default function ThemeChanger() {
       onChange={changeTheme}
       name="theme-changer"
       id="theme-changer"
-      className="theme-changer"
+      className="selectoooor"
       value={theme}
     >
       <option value="carboo">Carboo 👻</option>

@@ -11,6 +11,7 @@ export default function UserNutrientListColumn({
   dailyInsulin,
   bloodSugar,
   isBreakfastToggled,
+  idealBs,
 }) {
   const [isScrolling, setIsScrolling] = useState(false);
   const sectionRef = useRef(null);
@@ -42,6 +43,7 @@ export default function UserNutrientListColumn({
         setUserList={setUserList}
         isBreakfastToggled={isBreakfastToggled}
         isScrolling={isScrolling}
+        idealBs={idealBs}
       />
     </section>
   );

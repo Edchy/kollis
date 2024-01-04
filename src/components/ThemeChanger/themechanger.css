@@ -1,9 +1,10 @@
-.theme-changer {
+.selectoooor {
   border-radius: var(--radius);
   padding: 4px;
   /* padding-right: 10px; */
   border: none;
-  background-color: var(--color-dark-500);
+  /* background-color: var(--color-dark-500); */
+  background-color: var(--color-brand-primary);
   color: var(--color-light);
   font-weight: bold;
 }

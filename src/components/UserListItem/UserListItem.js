@@ -1,5 +1,5 @@
 import Button from "../Button/Button";
-import { IoTrashBinSharp } from "react-icons/io5";
+import { FaTrash } from "react-icons/fa6";
 
 import "./userlistitem.css";
 
@@ -16,7 +16,7 @@ export default function UserListItem({ item, onDelete, className }) {
       </div>
       {/* varje objekt får en knapp, där funktionen för delete skickas in som prop. Funktionen tar objektet som parameter och filtrerar bort detta i handleDelete funktionen */}
       <Button className="delete-btn" onClick={() => onDelete(item)}>
-        <IoTrashBinSharp />
+        <FaTrash />
       </Button>
     </li>
   );

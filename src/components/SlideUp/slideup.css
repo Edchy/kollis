@@ -1,7 +1,6 @@
 .slide-up {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
   background-color: transparent;
   height: 400px;
@@ -36,7 +35,6 @@
   position: absolute;
   border-radius: var(--radius);
   width: 400px;
-  /* height: 120px;  */
   right: -200px;
   top: -20px;
   padding: 1rem;
@@ -49,7 +47,6 @@
     color: var(--color-light);
     font-size: 1.75rem;
     background-color: transparent;
-    /* border: 1px solid gray; */
     position: absolute;
     top: -40px;
     right: 0;

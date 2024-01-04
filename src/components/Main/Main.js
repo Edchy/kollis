@@ -5,10 +5,14 @@ import SearchAndResultsColumn from "../SearchAndResultsColumn/SearchAndResultsCo
 import "./main.css";
 // import SlideUp from "./SlideUp/SlideUp";
 
-export default function Main({ bloodSugar, dailyInsulin, isBreakfastToggled }) {
+export default function Main({
+  bloodSugar,
+  dailyInsulin,
+  isBreakfastToggled,
+  idealBs,
+}) {
   // state för de livsmedel som användaren lägger till i sin "lista". initialt en tom array.
   const [userList, setUserList] = useState([]);
-
   // tar objekt som ska tas bort som argument. anropar state-sättar funktionen för listan.
   // filtrerar listan och returnerar endast de objekt vars name inte är samma som det som skickades med som argument
   function handleDelete(item) {
@@ -54,6 +58,7 @@ export default function Main({ bloodSugar, dailyInsulin, isBreakfastToggled }) {
         bloodSugar={bloodSugar}
         dailyInsulin={dailyInsulin}
         isBreakfastToggled={isBreakfastToggled}
+        idealBs={idealBs}
       />
     </main>
   );

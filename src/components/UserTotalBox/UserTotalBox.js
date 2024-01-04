@@ -7,16 +7,15 @@ export default function UserTotalBox({
   setUserList,
   isBreakfastToggled,
   isScrolling,
+  idealBs,
 }) {
   // räkna ut totalt antal kolhydrater genom att plussa ihop alla värden för varje objekts property för antal kolhydrater (carbohydrates_total_g)
   const totalCarbs = userList.reduce(
     (acc, curr) => acc + curr.carbohydrates_total_g,
     0
   );
-  // logik för uträkning av insulindosering. Baseras på de olika variablerna.
-
+  // logik för uträkning av insulindosering. Derived state.
   // Insulin som krävs för att sänka höga värden.
-  const idealBs = 6; // målvärde
   const corrFactor = 100 / dailyInsulin; // korrigerinsfaktor räknas ut.
   // korrigeringsdos - om blodsocker är högre än det ideala värdet ska uträkning göras för hur mycket insulin som behövs, annars ska inget ges.
   const corrDose =
