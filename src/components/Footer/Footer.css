@@ -1,5 +1,5 @@
 .main-footer {
-  background-color: var(--color-donut);
+  background-color: var(--color-brand-secondary);
   grid-area: foot;
   display: grid;
   place-content: center;

@@ -6,11 +6,12 @@
   --color-dark-500: #333337;
   --color-dark-300: #666a70;
   --color-light: #fefefa;
+  --color-bg: #fefefa;
   --color-brand-primary: #7f5af0;
   --color-brand-secondary: #2cb67d;
   --color-brand-tertiary: #37e3e6;
-  --color-donut: #feab67;
   --color-warning: rgb(244, 45, 45);
+  --color-text: #16161a;
   --radius: 0.5rem;
   --font-brand: "Sharpie", sans-serif;
   --font-primary: "Figtree", sans-serif;
@@ -48,13 +49,14 @@
 }
 
 body {
-  background-color: var(--color-light);
+  background-color: var(--color-bg);
   font-family: var(--font-primary);
   /* line-height: 1.5; */
 }
 
 input,
-button {
+button,
+select {
   font-family: inherit;
 }
 

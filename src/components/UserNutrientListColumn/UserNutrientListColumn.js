@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import UserList from "../UserList/UserList";
 import UserTotalBox from "../UserTotalBox/UserTotalBox";
 import "./usernutrientlistcolumn.css";
@@ -13,7 +13,7 @@ export default function UserNutrientListColumn({
   isBreakfastToggled,
 }) {
   const [isScrolling, setIsScrolling] = useState(false);
-
+  const sectionRef = useRef(null);
   // Koden i denna useEffect är ett samarbete mellan mig och chatGPT.
   // När komponenten mountas körs denna. Jag skapar en referens till
   useEffect(() => {
@@ -23,16 +23,17 @@ export default function UserNutrientListColumn({
       clearTimeout(timeout);
       timeout = setTimeout(() => setIsScrolling(false), 100);
     };
-    const userListColumn = document.querySelector(".user-list-column");
-    userListColumn.addEventListener("scroll", handleScroll);
+    // const userListColumn = document.querySelector(".user-list-column");
+    const userListCol = sectionRef.current;
+    userListCol.addEventListener("scroll", handleScroll);
     return () => {
-      userListColumn.removeEventListener("scroll", handleScroll);
+      userListCol.removeEventListener("scroll", handleScroll);
       clearTimeout(timeout);
     };
   }, []);
 
   return (
-    <section className="user-list-column">
+    <section ref={sectionRef} className="user-list-column">
       <UserList userList={userList} onDelete={onDelete} />
       <UserTotalBox
         bloodSugar={bloodSugar}

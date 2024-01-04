@@ -2,7 +2,8 @@
   grid-area: main;
   display: grid;
   grid-template-columns: 4fr 1fr;
-  gap: 1px;
+  gap: 2px;
+  padding-block: 2px;
   padding-inline: clamp(0.3125rem, 0.0284rem + 1.2121vw, 0.9375rem);
 
   @media (max-width: 768px) {
